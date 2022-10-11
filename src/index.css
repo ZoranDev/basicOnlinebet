@@ -7,3 +7,29 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.test {
+  position: relative;
+}
+
+.test :hover {
+  cursor: pointer;
+}
+
+.test::before {
+  content: " ";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  transform: scaleX(0);
+  transition: all 0.5s;
+}
+
+.test:hover::before {
+  transform: scaleX(1);
+  cursor: pointer;
+}

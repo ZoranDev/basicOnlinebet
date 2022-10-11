@@ -1,5 +1,7 @@
 // react
 import { useState, useEffect } from "react";
+// router
+import { Link } from "react-router-dom";
 // components
 import Button from "./Button";
 // icons
@@ -7,7 +9,7 @@ import { FaBars, FaWindowClose } from "react-icons/fa";
 
 const Navbar = () => {
   // State for show navbar
-  const [showNavbar, setShowNavbar] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
 
   //showHideNavbar
   const showHideNavbar = () => {
@@ -32,9 +34,15 @@ const Navbar = () => {
       {/* Links & Login */}
       {showNavbar && (
         <div className="w-full py-3 flex flex-col bg-zinc-500 items-center justify-start absolute top-[60px] left-0 sm:w-2/4 sm:relative sm:top-0  sm:flex-row sm:py-0 sm:justify-between sm:bg-transparent">
-          <h1 className="mb-3 text-xl text-white capitalize cursor-pointer hover:text-blue-700 hover:transition-colors hover:duration-[400ms] sm:mb-0">
-            Soccer
-          </h1>
+          <Link
+            to="/soccer"
+            children={
+              <h1 className="mb-3 text-xl text-white capitalize cursor-pointer hover:text-blue-700 hover:transition-colors hover:duration-[400ms] sm:mb-0">
+                Soccer
+              </h1>
+            }
+          />
+
           <Button text="log in" />
         </div>
       )}
