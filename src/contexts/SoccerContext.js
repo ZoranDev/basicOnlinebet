@@ -48,7 +48,16 @@ export const SoccerContextProvider = ({ children }) => {
   const addToTicket = (game, oddValue, id) => {
     // check to see if game is alredy in matches and action depends on weather game is on ticket or not
     if (myTicket.matches.map((match) => match.id).indexOf(id) !== -1) {
-      alert("alredy there");
+      setMyTicket({
+        ...myTicket,
+        matches: myTicket.matches.map((match) => {
+          if (match.id === id) {
+            match.game = game;
+            match.oddValue = oddValue;
+          }
+          return match;
+        }),
+      });
     } else {
       setMyTicket({
         ...myTicket,
