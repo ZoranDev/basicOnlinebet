@@ -4,7 +4,6 @@ import { useContext, useState, useEffect } from "react";
 import SoccerContext from "../../contexts/SoccerContext";
 // components
 import MatchOnTicket from "./MatchOnTicket";
-import Error from "../Error";
 
 const MyTicket = () => {
   // context
