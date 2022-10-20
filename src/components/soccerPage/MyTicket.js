@@ -11,6 +11,7 @@ const MyTicket = () => {
   const {
     myTicket: { matches, coeff, makings, stake },
     setStake,
+    payTicket,
   } = useContext(SoccerContext);
 
   // state for ok stake
@@ -24,18 +25,11 @@ const MyTicket = () => {
     setOkStake(stake < 1 || stake > 500 || stake === "" ? false : true);
   };
 
-  // state for error
-  const [error, setError] = useState({ active: false, message: "" });
-
-  // payTicket
-  const payTicket = () => {
-    if (matches.length === 0) {
-      setError({ active: true, message: "Empty ticket!" });
-    } else if (!okStake) {
-      setError({ active: true, message: "Stake problem!" });
-    } else {
-      setError({ active: false, message: "" });
+  // handleClick
+  const handleClick = () => {
+    if (matches.length !== 0 && okStake) {
       alert("success");
+      payTicket();
     }
   };
 
@@ -90,11 +84,9 @@ const MyTicket = () => {
           <h1>Makings:</h1>
           <h1>{parseFloat(makings).toFixed(2)}</h1>
         </div>
-        {/* Error section */}
-        {error.active && <Error message={error.message} />}
         {/* Pay btn */}
         <button
-          onClick={payTicket}
+          onClick={handleClick}
           className={`w-[100px] my-2 ${
             okStake && matches.length !== 0
               ? "bg-blue-400"

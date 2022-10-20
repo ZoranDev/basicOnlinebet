@@ -74,6 +74,11 @@ export const SoccerContextProvider = ({ children }) => {
     value.length <= 4 && setMyTicket({ ...myTicket, stake: value });
   };
 
+  // payTicket
+  const payTicket = () => {
+    console.log(myTicket);
+  };
+
   return (
     <SoccerContext.Provider
       value={{
@@ -83,6 +88,7 @@ export const SoccerContextProvider = ({ children }) => {
         addToTicket,
         deleteFromTicket,
         setStake,
+        payTicket,
       }}
     >
       {children}
