@@ -1,15 +1,43 @@
 // react
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 // context
 import SoccerContext from "../../contexts/SoccerContext";
 // components
 import MatchOnTicket from "./MatchOnTicket";
+import Error from "../Error";
 
 const MyTicket = () => {
   // context
   const {
-    myTicket: { matches, coeff, makings },
+    myTicket: { matches, coeff, makings, stake },
+    setStake,
   } = useContext(SoccerContext);
+
+  // state for ok stake
+  const [okStake, setOkStake] = useState(true);
+
+  useEffect(() => {
+    isStakeOk();
+  }, [stake]);
+
+  const isStakeOk = () => {
+    setOkStake(stake < 1 || stake > 500 || stake === "" ? false : true);
+  };
+
+  // state for error
+  const [error, setError] = useState({ active: false, message: "" });
+
+  // payTicket
+  const payTicket = () => {
+    if (matches.length === 0) {
+      setError({ active: true, message: "Empty ticket!" });
+    } else if (!okStake) {
+      setError({ active: true, message: "Stake problem!" });
+    } else {
+      setError({ active: false, message: "" });
+      alert("success");
+    }
+  };
 
   return (
     <div className="w-[20%] bg-neutral-400 rounded-tl-md rounded-tr-md overflow-hidden flex flex-col justify-center">
@@ -21,7 +49,9 @@ const MyTicket = () => {
       {/* Played matches */}
       <div className="p-2">
         {matches.length === 0 ? (
-          <div>Select game</div>
+          <div className="w-full text-center text-white">
+            Nothing on ticket yet
+          </div>
         ) : (
           matches.map((match, index) => (
             <MatchOnTicket key={index} info={match} />
@@ -32,13 +62,21 @@ const MyTicket = () => {
       {/* Stake, coeff, makings, payBtn and more */}
       <div className="w-full px-2 flex flex-col justify-center items-center">
         {/* Stake */}
-        <div className="w-full h-[40px] mb-2 flex items-center justify-center">
+        <div
+          className={`w-full h-[40px] bg-white mb-2 flex items-center justify-center border-[3px] ${
+            okStake ? "border-white" : "border-red-500"
+          }`}
+        >
           <input
             type="number"
+            value={stake}
+            onChange={setStake}
+            min={1}
+            max={500}
             placeholder="Stake"
             className="w-[80%] h-full p-2 focus:outline-0"
           />
-          <h1 className="w-[20%] h-full p-2 flex items-center justify-center bg-blue-400 text-white border-[2px] border-white">
+          <h1 className="w-[20%] h-full p-2 flex items-center justify-center bg-blue-400 text-white">
             €
           </h1>
         </div>
@@ -52,15 +90,23 @@ const MyTicket = () => {
           <h1>Makings:</h1>
           <h1>{parseFloat(makings).toFixed(2)}</h1>
         </div>
+        {/* Error section */}
+        {error.active && <Error message={error.message} />}
         {/* Pay btn */}
-
-        <button className="w-[100px] my-2 bg-blue-400 py-2 text-white rounded-lg">
+        <button
+          onClick={payTicket}
+          className={`w-[100px] my-2 ${
+            okStake && matches.length !== 0
+              ? "bg-blue-400"
+              : "bg-neutral-300 cursor-not-allowed"
+          }  py-2 text-white rounded-lg`}
+        >
           PAY
         </button>
 
         {/* Additional */}
         <div className="w-full mb-2 text-white text-md">
-          <p>* Min stake is 1 €</p>
+          <p>* Min stake 1€ max 500€</p>
           <div className="w-full flex items-center justify-between">
             <label htmlFor="deleteAfterPay">Delete after pay</label>
             <input

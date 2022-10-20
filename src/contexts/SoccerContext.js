@@ -17,7 +17,7 @@ export const SoccerContextProvider = ({ children }) => {
   // every change of played matches either add or remove trigger this function
   useEffect(() => {
     calculateCoeffAndMakings();
-  }, [myTicket.matches]);
+  }, [myTicket.matches, myTicket.stake]);
 
   // calculateCoeffAndMakings
   const calculateCoeffAndMakings = () => {
@@ -60,14 +60,18 @@ export const SoccerContextProvider = ({ children }) => {
     }
   };
 
-  console.log(myTicket);
-
   // deleteFromTicket
   const deleteFromTicket = (id) => {
     setMyTicket({
       ...myTicket,
       matches: myTicket.matches.filter((match) => match.id !== id),
     });
+  };
+
+  // setStake
+  const setStake = (e) => {
+    let value = e.target.value;
+    value.length <= 4 && setMyTicket({ ...myTicket, stake: value });
   };
 
   return (
@@ -78,6 +82,7 @@ export const SoccerContextProvider = ({ children }) => {
         getLeagueInfo,
         addToTicket,
         deleteFromTicket,
+        setStake,
       }}
     >
       {children}
