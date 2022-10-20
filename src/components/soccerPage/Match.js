@@ -2,7 +2,7 @@ import React from "react";
 // components
 import Odd from "./Odd";
 
-const Match = ({ info: { away_team, home_team, bookmakers } }) => {
+const Match = ({ info: { away_team, home_team, bookmakers, id } }) => {
   return (
     <div className="w-full h-[55px] bg-neutral-500 mb-[2px] px-5 py-2 flex items-center justify-between">
       {/* Teams */}
@@ -12,9 +12,20 @@ const Match = ({ info: { away_team, home_team, bookmakers } }) => {
       </div>
       {/* Odds */}
       <div className="w-[30%] h-full flex items-center justify-between">
-        <Odd oddValue={bookmakers[0].markets[0].outcomes[0].price} />
-        <Odd oddValue={bookmakers[0].markets[0].outcomes[2].price} />
-        <Odd oddValue={bookmakers[0].markets[0].outcomes[1].price} />
+        {[
+          { game: "1", bookmarkIndex: 0 },
+          { game: "X", bookmarkIndex: 2 },
+          { game: "2", bookmarkIndex: 1 },
+        ].map((item, index) => (
+          <Odd
+            key={index}
+            game={item.game}
+            oddValue={
+              bookmakers[0].markets[0].outcomes[item.bookmarkIndex].price
+            }
+            id={id}
+          />
+        ))}
       </div>
     </div>
   );

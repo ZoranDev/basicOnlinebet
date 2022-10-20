@@ -39,10 +39,10 @@ const Matches = () => {
     });
   }
 
-  console.log(sortArr);
+  /* console.log(sortArr); */
 
   return (
-    <div className="w-[60%] ">
+    <div className="w-[57%] ">
       {sortArr.length !== 0 ? (
         sortArr.map((matches, index) => (
           <div key={index} className="mb-5">
