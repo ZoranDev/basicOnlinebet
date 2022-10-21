@@ -1,5 +1,7 @@
 // react
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+// context
+import MainContext from "../../contexts/MainContext";
 // components
 import Error from "../Error";
 // icons
@@ -18,6 +20,8 @@ let validEmail =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const LogIn = () => {
+  // context
+  const { users, createNewuser, logUser } = useContext(MainContext);
   // state for log in or register
   const [logInRegister, setLogInRegister] = useState("login");
   // state for show password
@@ -99,8 +103,16 @@ const LogIn = () => {
     e.preventDefault();
     // check to see if input data are in correct form and if there is input info at all, different condition for log in and register
     if (!error.active && haveInfo()) {
-      resetState();
-      console.log("MOVE ON");
+      /* Check to see if btn is log in or btn is register */
+      logInRegister === "login"
+        ? users.map((user) => user.email).indexOf(inputData.email) === -1 ||
+          users.map((user) => user.password).indexOf(inputData.password) === -1
+          ? setError({
+              active: true,
+              message: "User don't exist, check data or register.",
+            })
+          : logUser(inputData.email)
+        : createNewuser(inputData);
     }
   };
 

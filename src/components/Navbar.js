@@ -33,7 +33,7 @@ const Navbar = () => {
   });
 
   return (
-    <div className="w-full h-[60px] px-5 py-2 bg-zinc-800 flex flex items-center justify-between relative z-20">
+    <div className="w-full h-[60px] px-5 py-2 bg-zinc-800 flex flex items-center justify-between relative z-20 ">
       {/* Logo */}
       <div className="text-white text-2xl  flex items-center justify-center cursor-pointer">
         <h1 className="font-bold text-blue-700 uppercase">Bet</h1>
