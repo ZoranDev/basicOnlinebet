@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import MainContext from "../contexts/MainContext";
 // components
 import Button from "./Button";
+import NavbarActiveUser from "./NavbarActiveUser";
 // icons
 import { FaBars, FaWindowClose } from "react-icons/fa";
 
 const Navbar = () => {
   // context
-  const { users } = useContext(MainContext);
-  console.log(users);
+  const { activeUser } = useContext(MainContext);
 
   // State for show navbar
   const [showNavbar, setShowNavbar] = useState(true);
@@ -42,7 +42,7 @@ const Navbar = () => {
 
       {/* Links & Login */}
       {showNavbar && (
-        <div className="w-full py-3 flex flex-col bg-zinc-500 items-center justify-start absolute top-[60px] left-0 sm:w-2/4 sm:relative sm:top-0  sm:flex-row sm:py-0 sm:justify-between sm:bg-transparent">
+        <div className="w-full py-3 flex flex-col bg-zinc-500 items-center justify-start absolute top-[60px] left-0 sm:w-2/4 sm:relative sm:top-0  sm:flex-row sm:py-0 sm:justify-between sm:bg-transparent sm:h-full">
           <Link
             to="/soccer"
             children={
@@ -52,7 +52,11 @@ const Navbar = () => {
             }
           />
 
-          <Link to="/login" children={<Button text="log in" />} />
+          {activeUser ? (
+            <NavbarActiveUser />
+          ) : (
+            <Link to="/login" children={<Button text="log in" />} />
+          )}
         </div>
       )}
 
