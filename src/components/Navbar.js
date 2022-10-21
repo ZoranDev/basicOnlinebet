@@ -16,15 +16,18 @@ const Navbar = () => {
     setShowNavbar(!showNavbar);
   };
 
-  // show hide navbar based on screen width
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      window.innerWidth > 640 ? setShowNavbar(true) : setShowNavbar(false);
-    });
+    // otherwise when app is open directly on small screens shownav is true
+    window.innerWidth < 640 ? setShowNavbar(false) : setShowNavbar(true);
+  }, []);
+
+  // show hide navbar based on screen width
+  window.addEventListener("resize", () => {
+    window.innerWidth > 640 ? setShowNavbar(true) : setShowNavbar(false);
   });
 
   return (
-    <div className="w-full h-[60px] px-5 py-2 bg-zinc-800 flex flex items-center justify-between relative">
+    <div className="w-full h-[60px] px-5 py-2 bg-zinc-800 flex flex items-center justify-between relative z-20">
       {/* Logo */}
       <div className="text-white text-2xl  flex items-center justify-center cursor-pointer">
         <h1 className="font-bold text-blue-700 uppercase">Bet</h1>
@@ -43,7 +46,7 @@ const Navbar = () => {
             }
           />
 
-          <Button text="log in" />
+          <Link to="/login" children={<Button text="log in" />} />
         </div>
       )}
 
