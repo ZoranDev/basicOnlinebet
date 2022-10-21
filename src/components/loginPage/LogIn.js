@@ -99,19 +99,19 @@ const LogIn = () => {
     e.preventDefault();
     // check to see if input data are in correct form and if there is input info at all, different condition for log in and register
     if (!error.active && haveInfo()) {
-      console.log("MOVE ON");
       resetState();
+      console.log("MOVE ON");
     }
   };
 
   return (
-    <div className="w-[500px] mx-auto my-[100px] p-5 bg-zinc-400 rounded-md relative flex flex-col items-center">
+    <div className="w-[315px] mx-auto my-[100px] p-5 bg-zinc-400 rounded-md relative flex flex-col items-center sm:w-[500px]">
       {/* User icon */}
       <div className="w-[120px] h-[120px] bg-zinc-500 rounded-full flex items-center justify-center absolute -top-[60px] left-2/4 -translate-x-2/4 shadow-[inset_0_0_50px_rgba(255,255,255,0.7)]">
         <AiOutlineUser className="text-white text-6xl" />
       </div>
       {/* LogIn || Register */}
-      <div className="w-full mt-[60px] mb-6 flex items-center border-2 border-white bg-white">
+      <div className="w-full mt-[60px] mb-6 flex flex-col items-center border-2 border-white bg-white sm:flex-row">
         {[
           { title: "Log In", id: "login" },
           { title: "Register", id: "register" },
@@ -119,68 +119,88 @@ const LogIn = () => {
           <h1
             key={index}
             onClick={() => handleClick(item.id)}
-            className={`w-2/4 py-2 ${
+            className={`w-full py-2 ${
               logInRegister === item.id
                 ? "bg-zinc-600 text-white"
                 : "bg-white text-zinc-600"
-            } text-center text-md cursor-pointer`}
+            } text-center text-md cursor-pointer sm:w-2/4`}
           >
             {item.title}
           </h1>
         ))}
       </div>
-      {["email", "password", "userName", "phone"].map((item, index) => (
-        <div
-          key={index}
-          className={`w-[315px] h-[40px] mb-3 flex items-center ${
-            logInRegister === "login" &&
-            (item === "userName" || item === "phone")
-              ? "hidden"
-              : "block"
-          }`}
-        >
-          {/* Icon */}
-          {item === "email" ? (
-            <AiOutlineMail
-              className={"w-[50px] h-full px-3 bg-zinc-600 text-white"}
-            />
-          ) : item === "password" && showPassword ? (
-            <AiFillEye
-              onClick={handleShowPassword}
-              className={
-                "w-[50px] h-full px-3 bg-zinc-600 text-white cursor-pointer"
-              }
-            />
-          ) : item === "password" && !showPassword ? (
-            <AiFillEyeInvisible
-              onClick={handleShowPassword}
-              className={
-                "w-[50px] h-full px-3 bg-zinc-600 text-white cursor-pointer"
-              }
-            />
-          ) : item === "userName" ? (
+      {/* Email */}
+      <div className="w-full h-[40px] mb-3 flex items-center sm:w-[315px]">
+        <AiOutlineMail
+          className={"w-[50px] h-full px-3 bg-zinc-600 text-white"}
+        />
+        <input
+          type="text"
+          name="email"
+          value={inputData.email}
+          onChange={handleOnChange}
+          placeholder="Email"
+          className={`w-[90%] h-full px-3 py-1 text-xl focus:outline-0 sm:w-[265px] `}
+        />
+      </div>
+      {/* Password */}
+      <div className="w-full h-[40px] mb-3 flex items-center sm:w-[315px]">
+        {showPassword ? (
+          <AiFillEye
+            onClick={handleShowPassword}
+            className={
+              "w-[50px] h-full px-3 bg-zinc-600 text-white cursor-pointer"
+            }
+          />
+        ) : (
+          <AiFillEyeInvisible
+            onClick={handleShowPassword}
+            className={
+              "w-[50px] h-full px-3 bg-zinc-600 text-white cursor-pointer"
+            }
+          />
+        )}
+        <input
+          type={showPassword ? "text" : "password"}
+          name="password"
+          value={inputData.password}
+          onChange={handleOnChange}
+          placeholder="Password"
+          className={`w-[90%] h-full px-3 py-1 text-xl focus:outline-0 sm:w-[265px] `}
+        />
+      </div>
+      {logInRegister === "register" && (
+        <>
+          {/* User name */}
+          <div className="w-full h-[40px] mb-3 flex items-center sm:w-[315px]">
             <AiOutlineUser
               className={"w-[50px] h-full px-3 bg-zinc-600 text-white"}
             />
-          ) : (
+            <input
+              type="text"
+              name="userName"
+              value={inputData.userName}
+              onChange={handleOnChange}
+              placeholder="User name"
+              className={`w-[90%] h-full px-3 py-1 text-xl focus:outline-0 sm:w-[265px] `}
+            />
+          </div>
+          {/* Phone */}
+          <div className="w-full h-[40px] mb-3 flex items-center sm:w-[315px]">
             <AiOutlinePhone
               className={"w-[50px] h-full px-3 bg-zinc-600 text-white"}
             />
-          )}
-
-          {/* Input */}
-          <input
-            type={item === "password" && !showPassword ? "password" : "text"}
-            name={item}
-            value={inputData.item}
-            onChange={handleOnChange}
-            placeholder={item}
-            className={`w-[265px] h-full px-3 py-1 text-xl focus:outline-0 placeholder:capitalize `}
-            required={true}
-          />
-        </div>
-      ))}
-
+            <input
+              type="text"
+              name="phone"
+              value={inputData.phone}
+              onChange={handleOnChange}
+              placeholder="Phone number"
+              className={`w-[90%] h-full px-3 py-1 text-xl focus:outline-0 sm:w-[265px] `}
+            />
+          </div>
+        </>
+      )}
       {/* Error section */}
       {error.active && <Error message={error.message} />}
 
