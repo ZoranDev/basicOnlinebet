@@ -1,13 +1,19 @@
 // react
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 // router
 import { Link } from "react-router-dom";
+// context
+import MainContext from "../contexts/MainContext";
 // components
 import Button from "./Button";
 // icons
 import { FaBars, FaWindowClose } from "react-icons/fa";
 
 const Navbar = () => {
+  // context
+  const { users } = useContext(MainContext);
+  console.log(users);
+
   // State for show navbar
   const [showNavbar, setShowNavbar] = useState(true);
 
