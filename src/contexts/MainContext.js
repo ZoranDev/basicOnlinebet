@@ -45,6 +45,18 @@ export const MainContextProvider = ({ children }) => {
     navigate("/soccer");
   };
 
+  // changePassword
+  const changePassword = (newPassword) => {
+    setUsers(
+      users.map((user) => {
+        if (user.id === activeUser.id) {
+          user.password = newPassword;
+        }
+        return user;
+      })
+    );
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -53,6 +65,7 @@ export const MainContextProvider = ({ children }) => {
         createNewuser,
         logUser,
         logOut,
+        changePassword,
       }}
     >
       {children}
