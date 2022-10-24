@@ -57,6 +57,19 @@ export const MainContextProvider = ({ children }) => {
     );
   };
 
+  // updateUserPersonalDetails
+  const updateUserPersonalDetails = (whatToUpd, valueToUpd) => {
+    setUsers(
+      users.map((user) => {
+        if (user.id === activeUser.id) {
+          user.userName = whatToUpd === "userName" ? valueToUpd : user.userName;
+          user.phone = whatToUpd === "phone" ? valueToUpd : user.phone;
+        }
+        return user;
+      })
+    );
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -66,6 +79,7 @@ export const MainContextProvider = ({ children }) => {
         logUser,
         logOut,
         changePassword,
+        updateUserPersonalDetails,
       }}
     >
       {children}
