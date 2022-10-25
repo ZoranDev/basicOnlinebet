@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 // context
 import MainContext from "../../contexts/MainContext";
 // components
-import Error from "../Error";
+import ErrorSuccess from "../ErrorSuccess";
 // icons
 import {
   AiOutlineUser,
@@ -48,15 +48,11 @@ const LogIn = () => {
     let userName = inputData.userName;
     let phone = inputData.phone;
     // if loginregister === login then only check mail otherwise check name and phone
-    if (logInRegister === "login") {
-      return !validEmail.test(email) && email !== "";
-    } else {
-      return (
-        (!validEmail.test(email) && email !== "") ||
-        (hasNumber.test(userName) && userName !== "") ||
-        (hasChar.test(phone) && phone !== "")
-      );
-    }
+    return logInRegister === "login"
+      ? !validEmail.test(email) && email !== ""
+      : (!validEmail.test(email) && email !== "") ||
+          (hasNumber.test(userName) && userName !== "") ||
+          (hasChar.test(phone) && phone !== "");
   };
 
   // handleClick
@@ -76,26 +72,12 @@ const LogIn = () => {
 
   // haveInfo
   const haveInfo = () => {
-    if (logInRegister === "login") {
-      return inputData.email !== "" && inputData.password !== "";
-    } else {
-      return (
-        inputData.email !== "" &&
-        inputData.password !== "" &&
-        inputData.userName !== "" &&
-        inputData.phone !== ""
-      );
-    }
-  };
-
-  // resetState
-  const resetState = () => {
-    setInputData({
-      email: "",
-      password: "",
-      userName: "",
-      phone: "",
-    });
+    return logInRegister === "login"
+      ? inputData.email !== "" && inputData.password !== ""
+      : inputData.email !== "" &&
+          inputData.password !== "" &&
+          inputData.userName !== "" &&
+          inputData.phone !== "";
   };
 
   // handleLogInRegister
@@ -214,7 +196,7 @@ const LogIn = () => {
         </>
       )}
       {/* Error section */}
-      {error.active && <Error message={error.message} />}
+      {error.active && <ErrorSuccess message={error.message} type="error" />}
 
       {/*  Submit button */}
       <button

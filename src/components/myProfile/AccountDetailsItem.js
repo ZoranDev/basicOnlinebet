@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 // context
 import MainContext from "../../contexts/MainContext";
 // components
-import Error from "../Error";
+import Error from "../ErrorSuccess";
 // icons
 import { AiFillEdit } from "react-icons/ai";
 import { FaCheck, FaExclamationTriangle } from "react-icons/fa";

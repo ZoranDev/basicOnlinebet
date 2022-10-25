@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext } from "react";
 // components
 import ChangePasswordInput from "./ChangePasswordInput";
-import Error from "../Error";
+import Error from "../ErrorSuccess";
 // context
 import MainContext from "../../contexts/MainContext";
 // icons

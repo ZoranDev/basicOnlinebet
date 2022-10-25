@@ -2,11 +2,15 @@
 import { AiOutlineWarning } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa";
 
-const Error = ({ message, type }) => {
+const ErrorSuccess = ({ message, type }) => {
   return (
     <div
       className={`w-full my-2 px-3 py-1 flex items-center justify-center ${
-        type === "success" ? "bg-green-500" : "bg-red-400"
+        type === "success"
+          ? "bg-green-500 text-white"
+          : type === "warning"
+          ? "bg-transparent text-red-500"
+          : "bg-red-400 text-white"
       }  text-white rounded-md`}
     >
       {type === "success" ? (
@@ -19,4 +23,4 @@ const Error = ({ message, type }) => {
   );
 };
 
-export default Error;
+export default ErrorSuccess;
