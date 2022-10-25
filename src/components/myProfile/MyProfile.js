@@ -1,7 +1,7 @@
 // react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // router dom
-import { Link } from "react-router-dom";
+import { Routes, Route, Link, useParams } from "react-router-dom";
 // components
 import AccountDetails from "./AccountDetails";
 import ChangePassword from "./ChangePassword";
@@ -11,13 +11,14 @@ import MyTicktes from "./MyTicktes";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const MyProfile = () => {
-  // state for displaying info
-  const [displayItem, setDisplayItem] = useState("accountDetails");
+  // state for active info
+  const [activeInfo, setActiveInfo] = useState(null);
 
-  // changeDisplayItem
-  const changeDisplayItem = (e) => {
-    setDisplayItem(e.target.id);
-  };
+  const params = useParams();
+
+  useEffect(() => {
+    setActiveInfo(Object.values(params)[0]);
+  }, [params]);
 
   return (
     <div className="w-[80%] mx-auto my-10 flex items-start relative">
@@ -31,23 +32,29 @@ const MyProfile = () => {
           { id: "myTickets", title: "My Tickets" },
           { id: "payment", title: "Payment" },
         ].map((item, index) => (
-          <h2
-            className={`w-full ${
-              displayItem === item.id ? "bg-blue-400 px-5" : "bg-zinc-500"
-            } px-3 py-2 text-white cursor-pointer hover:bg-blue-400 hover:px-5 transition-[padding] duration-[300ms]`}
+          <Link
             key={index}
-            id={item.id}
-            onClick={changeDisplayItem}
-          >
-            {item.title}
-          </h2>
+            to={`/myProfile/${item.id}`}
+            children={
+              <h2
+                className={`w-full ${
+                  activeInfo === item.id ? "bg-blue-400 px-5" : "bg-zinc-500"
+                } px-3 py-2 text-white cursor-pointer hover:bg-blue-400 hover:px-5 transition-[padding] duration-[300ms]`}
+              >
+                {item.title}
+              </h2>
+            }
+          />
         ))}
       </div>
+
       <div className="w-[70%] min-h-[300px] p-5 px-10 bg-zinc-400">
-        {displayItem === "accountDetails" && <AccountDetails />}
-        {displayItem === "changePassword" && <ChangePassword />}
-        {displayItem === "myTickets" && <MyTicktes />}
-        {displayItem === "payment" && <Payment />}
+        <Routes>
+          <Route path={`/accountDetails`} element={<AccountDetails />} />
+          <Route path="/changePassword" element={<ChangePassword />} />
+          <Route path="/myTickets" element={<MyTicktes />} />
+          <Route path="/payment" element={<Payment />} />
+        </Routes>
       </div>
 
       {/* Close my profile info */}
@@ -62,3 +69,7 @@ const MyProfile = () => {
 };
 
 export default MyProfile;
+
+/* ${
+  
+} */

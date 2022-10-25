@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/soccer" element={<Soccer />} />
             <Route path="/login" element={<LogIn />} />
-            <Route path="/myProfile" element={<MyProfile />} />
+            <Route path="/myProfile/*" element={<MyProfile />} />
           </Routes>
         </div>
       </MainContextProvider>

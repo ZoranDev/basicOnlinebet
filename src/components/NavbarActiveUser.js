@@ -81,7 +81,7 @@ const NavbarActiveUser = () => {
         } transition-[height] duration-[300ms] bg-zinc-800 absolute top-[53px] -right-[20px] z-20 overflow-hidden`}
       >
         <Link
-          to="/myProfile"
+          to="/myProfile/accountDetails"
           children={
             <div
               onClick={handleShowUserInfo}
