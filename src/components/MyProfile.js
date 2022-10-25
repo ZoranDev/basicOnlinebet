@@ -1,10 +1,14 @@
 // react
 import { useState } from "react";
+// router dom
+import { Link } from "react-router-dom";
 // components
 import AccountDetails from "./myProfile/AccountDetails";
 import ChangePassword from "./myProfile/ChangePassword";
 import Payment from "./myProfile/Payment";
 import MyTicktes from "./myProfile/MyTicktes";
+// icons
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const MyProfile = () => {
   // state for displaying info
@@ -16,7 +20,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="w-[80%] mx-auto my-10 p-10 border-2 border-white flex items-start">
+    <div className="w-[80%] mx-auto my-10 flex items-start relative">
       <div className="w-[30%]">
         <h1 className="w-full bg-zinc-700 px-3 py-2 text-white">
           Profile settings
@@ -45,6 +49,14 @@ const MyProfile = () => {
         {displayItem === "myTickets" && <MyTicktes />}
         {displayItem === "payment" && <Payment />}
       </div>
+
+      {/* Close my profile info */}
+      <Link
+        to="/soccer"
+        children={
+          <AiOutlineCloseCircle className="absolute right-2 top-2 text-2xl text-white hover:text-blue-500 transition-colors duration-[300ms] cursor-pointer" />
+        }
+      />
     </div>
   );
 };
