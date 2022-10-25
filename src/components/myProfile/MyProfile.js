@@ -3,10 +3,10 @@ import { useState } from "react";
 // router dom
 import { Link } from "react-router-dom";
 // components
-import AccountDetails from "./myProfile/AccountDetails";
-import ChangePassword from "./myProfile/ChangePassword";
-import Payment from "./myProfile/Payment";
-import MyTicktes from "./myProfile/MyTicktes";
+import AccountDetails from "./AccountDetails";
+import ChangePassword from "./ChangePassword";
+import Payment from "./Payment";
+import MyTicktes from "./MyTicktes";
 // icons
 import { AiOutlineCloseCircle } from "react-icons/ai";
 

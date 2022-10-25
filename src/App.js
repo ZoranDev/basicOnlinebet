@@ -6,7 +6,7 @@ import { MainContextProvider } from "./contexts/MainContext";
 import Navbar from "./components/Navbar";
 import Soccer from "./components/soccerPage/Soccer";
 import LogIn from "./components/loginPage/LogIn";
-import MyProfile from "./components/MyProfile";
+import MyProfile from "./components/myProfile/MyProfile";
 
 function App() {
   return (
