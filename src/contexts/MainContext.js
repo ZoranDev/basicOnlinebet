@@ -70,6 +70,18 @@ export const MainContextProvider = ({ children }) => {
     );
   };
 
+  // updateUserMoney
+  const updateUserMoney = (newMoney) => {
+    setUsers(
+      users.map((user) => {
+        if (user.id === activeUser.id) {
+          user.money = parseInt(newMoney) + parseInt(user.money);
+        }
+        return user;
+      })
+    );
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -80,6 +92,7 @@ export const MainContextProvider = ({ children }) => {
         logOut,
         changePassword,
         updateUserPersonalDetails,
+        updateUserMoney,
       }}
     >
       {children}
