@@ -6,7 +6,7 @@ import MainContext from "../../contexts/MainContext";
 import Error from "../Error";
 // icons
 import { AiFillEdit } from "react-icons/ai";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
 
 const AccountDetailsItem = ({ id, title, text }) => {
   // context
@@ -16,7 +16,9 @@ const AccountDetailsItem = ({ id, title, text }) => {
   const [info, setInfo] = useState(text);
   // state for disabled
   const [disabled, setDisabled] = useState(true);
-  // state for error
+  // state for error in info
+  const [errorInInfo, setErrorInInfo] = useState(false);
+  // state for error - to display when success mozda ovo promjeniti naziv komponente i ubaciti to kako treba
   const [error, setError] = useState({
     active: false,
     message: "",
@@ -34,21 +36,31 @@ const AccountDetailsItem = ({ id, title, text }) => {
     setDisabled(!disabled);
   };
 
+  // Check if value has some character
+  let hasChar = /[a-zA-Z]/g;
+  let hasNumber = /\d/;
+
   // handleOnChange
   const handleOnChange = (e) => {
+    let value = e.target.value;
+    setErrorInInfo(false);
+    id === "userName" && hasNumber.test(value) && setErrorInInfo(true);
+    id === "phone" && hasChar.test(value) && setErrorInInfo(true);
     setInfo(e.target.value);
   };
 
   // handleSubmitChanges
   const handleSubmitChanges = () => {
-    updateUserPersonalDetails(id, info);
-    handleEditInfo();
-    setError({
-      active: true,
-      message: `Account ${title} updated!`,
-      type: "success",
-    });
-    removeError();
+    if (!errorInInfo) {
+      updateUserPersonalDetails(id, info);
+      handleEditInfo();
+      setError({
+        active: true,
+        message: `Account ${title} updated!`,
+        type: "success",
+      });
+      removeError();
+    }
   };
 
   // remove error
@@ -86,6 +98,11 @@ const AccountDetailsItem = ({ id, title, text }) => {
             />
           ))}
       </div>
+      {errorInInfo && (
+        <div className="flex items-center justify-left text-red-500">
+          <FaExclamationTriangle className="mr-2" /> Error in {title}
+        </div>
+      )}
       {/* Show success after updated */}
       {error.active && <Error message={error.message} type={error.type} />}
     </div>
