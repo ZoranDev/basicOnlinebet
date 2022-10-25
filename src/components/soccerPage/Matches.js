@@ -1,5 +1,5 @@
 // react
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 // context
 import SoccerContext from "../../contexts/SoccerContext";
 // components
@@ -38,8 +38,6 @@ const Matches = () => {
         );
     });
   }
-
-  /* console.log(sortArr); */
 
   return (
     <div className="w-[57%] ">

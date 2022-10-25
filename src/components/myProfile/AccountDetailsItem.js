@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 // context
 import MainContext from "../../contexts/MainContext";
 // components
-import Error from "../ErrorSuccess";
+import ErrorSuccess from "../ErrorSuccess";
 // icons
 import { AiFillEdit } from "react-icons/ai";
 import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
@@ -104,7 +104,9 @@ const AccountDetailsItem = ({ id, title, text }) => {
         </div>
       )}
       {/* Show success after updated */}
-      {error.active && <Error message={error.message} type={error.type} />}
+      {error.active && (
+        <ErrorSuccess message={error.message} type={error.type} />
+      )}
     </div>
   );
 };

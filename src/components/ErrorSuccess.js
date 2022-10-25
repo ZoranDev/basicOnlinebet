@@ -5,7 +5,9 @@ import { FaCheck } from "react-icons/fa";
 const ErrorSuccess = ({ message, type }) => {
   return (
     <div
-      className={`w-full my-2 px-3 py-1 flex items-center justify-center ${
+      className={`w-full my-2 px-3 py-1 flex items-center ${
+        type === "warning" ? "justify-left" : "justify-center"
+      } ${
         type === "success"
           ? "bg-green-500 text-white"
           : type === "warning"

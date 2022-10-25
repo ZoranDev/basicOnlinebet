@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 // context
 import MainContext from "../../contexts/MainContext";
 // components
-import Error from "../ErrorSuccess";
+import ErrorSuccess from "../ErrorSuccess";
 // Icons
 import { FaQuestion, FaExclamationTriangle } from "react-icons/fa";
 
@@ -156,12 +156,12 @@ const Payment = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="max-w-[400px]">
       {/* Card number */}
       <div className="w-full mb-2">
         <h2 className="w-full mb-2 text-lg bg-transparent">Card number:</h2>
         <div
-          className={`bg-white max-w-[400px] h-[50px] py-2 px-4 flex items-center justify-between`}
+          className={`bg-white  h-[50px] py-2 px-4 flex items-center justify-between`}
         >
           {["num1", "num2", "num3", "num4"].map((item, index) => (
             <input
@@ -186,9 +186,7 @@ const Payment = () => {
           ))}
         </div>
         {cardNumberErr && (
-          <div className="flex items-center justify-left text-red-500">
-            <FaExclamationTriangle className="mr-2" /> Check card number!
-          </div>
+          <ErrorSuccess message="Check card number" type="warning" />
         )}
       </div>
 
@@ -228,9 +226,7 @@ const Payment = () => {
           </select>
         </div>
         {expireDateErr && (
-          <div className="flex items-center justify-left text-red-500">
-            <FaExclamationTriangle className="mr-2" /> Check expire date!
-          </div>
+          <ErrorSuccess message="Check expire date!" type="warning" />
         )}
       </div>
 
@@ -264,11 +260,7 @@ const Payment = () => {
             } transition-[height] duration-[400ms] rounded-lg absolute -top-[100px]`}
           />
         </div>
-        {cvcErr && (
-          <div className="flex items-center justify-left text-red-500">
-            <FaExclamationTriangle className="mr-2" /> Check cvc!
-          </div>
-        )}
+        {cvcErr && <ErrorSuccess message="Check CVC!" type="warning" />}
       </div>
 
       {/* How much to pay in */}
@@ -290,9 +282,7 @@ const Payment = () => {
         </div>
         <p className="my-1 text-sm text-blue-500">* Min 5€ max 500€</p>
         {payInValueErr && (
-          <div className="flex items-center justify-left text-red-500">
-            <FaExclamationTriangle className="mr-2" /> Check pay in value!
-          </div>
+          <ErrorSuccess message="Check amonut!" type="warning" />
         )}
       </div>
 
@@ -309,7 +299,7 @@ const Payment = () => {
       </button>
 
       {/* When success */}
-      {error.active && <Error message={error.message} type="success" />}
+      {error.active && <ErrorSuccess message={error.message} type="success" />}
     </div>
   );
 };

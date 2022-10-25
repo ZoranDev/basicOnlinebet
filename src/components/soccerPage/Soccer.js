@@ -1,5 +1,3 @@
-// react
-
 // context
 import { SoccerContextProvider } from "../../contexts/SoccerContext";
 // components

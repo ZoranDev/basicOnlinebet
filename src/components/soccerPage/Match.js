@@ -1,4 +1,3 @@
-import React from "react";
 // components
 import Odd from "./Odd";
 

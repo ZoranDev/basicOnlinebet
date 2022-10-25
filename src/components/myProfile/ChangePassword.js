@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext } from "react";
 // components
 import ChangePasswordInput from "./ChangePasswordInput";
-import Error from "../ErrorSuccess";
+import ErrorSuccess from "../ErrorSuccess";
 // context
 import MainContext from "../../contexts/MainContext";
 // icons
@@ -133,7 +133,9 @@ const ChangePassword = () => {
       </button>
 
       {/* Error */}
-      {error.active && <Error message={error.message} type={error.type} />}
+      {error.active && (
+        <ErrorSuccess message={error.message} type={error.type} />
+      )}
     </div>
   );
 };

@@ -1,7 +1,5 @@
 // react
-import { useContext, useState, useEffect } from "react";
-// context
-import SoccerContext from "../../contexts/SoccerContext";
+import { useState } from "react";
 // components
 import LeagueBtn from "./LeagueBtn";
 // icons
@@ -19,8 +17,6 @@ const leagues = [
 ];
 
 const AvailableLeagues = () => {
-  // context
-
   // state for non filtered array of leagues
   const [displayedLeagues, setdisplayedLeagues] = useState(leagues);
 
