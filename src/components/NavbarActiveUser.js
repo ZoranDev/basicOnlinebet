@@ -58,9 +58,11 @@ const NavbarActiveUser = () => {
           <p className="">€</p>
         </div>
         {/* Pay in */}
-        <button className="h-full bg-blue-500 px-3 text-white hover:bg-blue-400">
-          + Pay In
-        </button>
+        <Link
+          className="h-full bg-blue-500 px-3 text-white hover:bg-blue-400 flex"
+          to="/myProfile/payment"
+          children={<button>+ Pay In</button>}
+        />
       </div>
       {/* My proflie */}
 
