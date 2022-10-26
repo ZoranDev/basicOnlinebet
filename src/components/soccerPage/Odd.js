@@ -3,10 +3,7 @@ import { useContext, useState, useEffect } from "react";
 // context
 import SoccerContext from "../../contexts/SoccerContext";
 
-const Odd = ({
-  info: { oddValue, game, id, away_team, home_team, commence_time },
-  info,
-}) => {
+const Odd = ({ info: { oddValue, id }, info }) => {
   // context
   const { addToTicket, myTicket } = useContext(SoccerContext);
 
