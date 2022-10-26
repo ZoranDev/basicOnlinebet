@@ -1,7 +1,9 @@
 // components
 import Odd from "./Odd";
 
-const Match = ({ info: { away_team, home_team, bookmakers, id } }) => {
+const Match = ({
+  info: { away_team, home_team, bookmakers, id, commence_time },
+}) => {
   return (
     <div className="w-full h-[55px] bg-neutral-500 mb-[2px] px-5 py-2 flex items-center justify-between">
       {/* Teams */}
@@ -18,13 +20,15 @@ const Match = ({ info: { away_team, home_team, bookmakers, id } }) => {
         ].map((item, index) => (
           <Odd
             key={index}
-            game={item.game}
-            oddValue={
-              bookmakers[0].markets[0].outcomes[item.bookmarkIndex].price
-            }
-            id={id}
-            away_team={away_team}
-            home_team={home_team}
+            info={{
+              game: item.game,
+              oddValue:
+                bookmakers[0].markets[0].outcomes[item.bookmarkIndex].price,
+              away_team: away_team,
+              home_team: home_team,
+              commence_time: commence_time,
+              id: id,
+            }}
           />
         ))}
       </div>

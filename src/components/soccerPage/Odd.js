@@ -3,13 +3,16 @@ import { useContext, useState, useEffect } from "react";
 // context
 import SoccerContext from "../../contexts/SoccerContext";
 
-const Odd = ({ oddValue, game, id, away_team, home_team }) => {
+const Odd = ({
+  info: { oddValue, game, id, away_team, home_team, commence_time },
+  info,
+}) => {
   // context
   const { addToTicket, myTicket } = useContext(SoccerContext);
 
   // onClick
   const onClick = () => {
-    addToTicket(game, oddValue, id, away_team, home_team);
+    addToTicket(info);
   };
 
   // onTicket?

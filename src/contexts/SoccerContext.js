@@ -45,36 +45,19 @@ export const SoccerContextProvider = ({ children }) => {
   };
 
   // addToTicket
-  const addToTicket = (game, oddValue, id, away_team, home_team) => {
+  const addToTicket = (info) => {
     // check to see if game is alredy in matches and action depends on weather game is on ticket or not
-    if (myTicket.matches.map((match) => match.id).indexOf(id) !== -1) {
-      setMyTicket({
-        ...myTicket,
-        matches: myTicket.matches.map((match) => {
-          if (match.id === id) {
-            match.game = game;
-            match.oddValue = oddValue;
-            match.home_team = home_team;
-            match.away_team = away_team;
-          }
-          return match;
-        }),
-      });
-    } else {
-      setMyTicket({
-        ...myTicket,
-        matches: [
-          ...myTicket.matches,
-          {
-            id: id,
-            game: game,
-            oddValue: oddValue,
-            home_team: home_team,
-            away_team: away_team,
-          },
-        ],
-      });
-    }
+    myTicket.matches.map((match) => match.id).indexOf(info.id) !== -1
+      ? setMyTicket({
+          ...myTicket,
+          matches: myTicket.matches.map((match) => {
+            return match.id === info.id ? info : match;
+          }),
+        })
+      : setMyTicket({
+          ...myTicket,
+          matches: [...myTicket.matches, info],
+        });
   };
 
   // deleteFromTicket

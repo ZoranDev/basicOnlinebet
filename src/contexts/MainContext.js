@@ -103,7 +103,6 @@ export const MainContextProvider = ({ children }) => {
       navigate("/login");
     }
   };
-  console.log(users);
 
   return (
     <MainContext.Provider
