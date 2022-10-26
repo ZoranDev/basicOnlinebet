@@ -49,9 +49,12 @@ const SingleTicket = ({
               key={index}
               className="w-full px-4 py-1 mb-2 flex items-center justify-between"
             >
-              <div className="w-[60%] flex items-center justify-between">
-                <h1 className="w-2-4">{match.home_team}</h1>
-                <h1 className="w-2/4">{match.away_team}</h1>
+              <div className="w-[70%] flex items-center justify-between">
+                <h1 className="w-[26%]">
+                  {match.commence_time.toString().slice(0, 10)}
+                </h1>
+                <h1 className="w-[26%]">{match.home_team}</h1>
+                <h1 className="w-[26%]">{match.away_team}</h1>
               </div>
 
               <h1 className="w-[40px] h-[30px] p-[5px] text-[10px] bg-blue-400 text-white flex items-center justify-center">
@@ -81,7 +84,7 @@ const SingleTicket = ({
                     ? `${parseFloat(coeff).toFixed(2)} €`
                     : item === "stake"
                     ? `${stake} €`
-                    : `${parseInt(makings).toFixed(2)} €`}
+                    : `${parseFloat(makings).toFixed(2)} €`}
                 </p>
               </div>
             ))}
