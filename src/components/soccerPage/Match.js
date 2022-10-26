@@ -23,6 +23,8 @@ const Match = ({ info: { away_team, home_team, bookmakers, id } }) => {
               bookmakers[0].markets[0].outcomes[item.bookmarkIndex].price
             }
             id={id}
+            away_team={away_team}
+            home_team={home_team}
           />
         ))}
       </div>

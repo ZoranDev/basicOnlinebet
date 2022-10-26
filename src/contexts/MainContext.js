@@ -21,6 +21,7 @@ export const MainContextProvider = ({ children }) => {
     let newUser = inputData;
     newUser.id = getID();
     newUser.money = 0;
+    newUser.tickets = [];
     // then add new user to existing users
     setUsers([...users, newUser]);
     setActiveUser(newUser);
@@ -82,6 +83,28 @@ export const MainContextProvider = ({ children }) => {
     );
   };
 
+  // payTicket
+  const payTicket = (myTicket) => {
+    // if there is no active user redirect to logIn page
+    if (activeUser) {
+      setUsers(
+        users.map((user) => {
+          if (user.id === activeUser.id) {
+            let newTicket = {
+              id: getID(),
+              body: myTicket,
+            };
+            user.tickets.push(newTicket);
+          }
+          return user;
+        })
+      );
+    } else {
+      navigate("/login");
+    }
+  };
+  console.log(users);
+
   return (
     <MainContext.Provider
       value={{
@@ -93,6 +116,7 @@ export const MainContextProvider = ({ children }) => {
         changePassword,
         updateUserPersonalDetails,
         updateUserMoney,
+        payTicket,
       }}
     >
       {children}

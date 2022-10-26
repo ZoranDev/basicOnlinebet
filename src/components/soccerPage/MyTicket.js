@@ -2,6 +2,7 @@
 import { useContext, useState, useEffect } from "react";
 // context
 import SoccerContext from "../../contexts/SoccerContext";
+import MainContext from "../../contexts/MainContext";
 // components
 import MatchOnTicket from "./MatchOnTicket";
 
@@ -9,9 +10,10 @@ const MyTicket = () => {
   // context
   const {
     myTicket: { matches, coeff, makings, stake },
+    myTicket,
     setStake,
-    payTicket,
   } = useContext(SoccerContext);
+  const { payTicket } = useContext(MainContext);
 
   // state for ok stake
   const [okStake, setOkStake] = useState(true);
@@ -28,7 +30,7 @@ const MyTicket = () => {
   const handleClick = () => {
     if (matches.length !== 0 && okStake) {
       alert("success");
-      payTicket();
+      payTicket(myTicket);
     }
   };
 

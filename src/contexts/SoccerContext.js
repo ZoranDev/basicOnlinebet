@@ -45,7 +45,7 @@ export const SoccerContextProvider = ({ children }) => {
   };
 
   // addToTicket
-  const addToTicket = (game, oddValue, id) => {
+  const addToTicket = (game, oddValue, id, away_team, home_team) => {
     // check to see if game is alredy in matches and action depends on weather game is on ticket or not
     if (myTicket.matches.map((match) => match.id).indexOf(id) !== -1) {
       setMyTicket({
@@ -54,6 +54,8 @@ export const SoccerContextProvider = ({ children }) => {
           if (match.id === id) {
             match.game = game;
             match.oddValue = oddValue;
+            match.home_team = home_team;
+            match.away_team = away_team;
           }
           return match;
         }),
@@ -63,7 +65,13 @@ export const SoccerContextProvider = ({ children }) => {
         ...myTicket,
         matches: [
           ...myTicket.matches,
-          { id: id, game: game, oddValue: oddValue },
+          {
+            id: id,
+            game: game,
+            oddValue: oddValue,
+            home_team: home_team,
+            away_team: away_team,
+          },
         ],
       });
     }
@@ -83,11 +91,6 @@ export const SoccerContextProvider = ({ children }) => {
     value.length <= 4 && setMyTicket({ ...myTicket, stake: value });
   };
 
-  // payTicket
-  const payTicket = () => {
-    console.log(myTicket);
-  };
-
   return (
     <SoccerContext.Provider
       value={{
@@ -97,7 +100,6 @@ export const SoccerContextProvider = ({ children }) => {
         addToTicket,
         deleteFromTicket,
         setStake,
-        payTicket,
       }}
     >
       {children}
