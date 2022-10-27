@@ -5,9 +5,9 @@ const Match = ({
   info: { away_team, home_team, bookmakers, id, commence_time },
 }) => {
   return (
-    <div className="w-full h-[55px] bg-neutral-500 mb-[2px] px-5 py-2 flex items-center justify-between">
+    <div className="w-full h-[55px] bg-transparent hover:bg-neutral-500 border-b-[1px] border-neutral-400 flex items-center justify-between">
       {/* Teams */}
-      <div className="w-[60%] flex flex-col items-center justify-between">
+      <div className="w-[60%] px-4 py-2 flex flex-col items-center justify-between">
         <h1 className="w-full">{home_team}</h1>
         <h1 className="w-full">{away_team} </h1>
       </div>

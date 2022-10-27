@@ -45,9 +45,9 @@ const Matches = () => {
         sortArr.map((matches, index) => (
           <div key={index} className="mb-5">
             {/* Date of matches and h2h */}
-            <div className="w-full bg-blue-500 px-5 py-2 border-b-[1px] border-b-white text-white flex items-center justify-between">
+            <div className="w-full bg-blue-500 border-b-[1px] border-b-white text-white flex items-center justify-between">
               {/* Date */}
-              <h1 className="w-[60%]">
+              <h1 className="w-[60%] px-5 py-2 ">
                 Date: {matches[0].commence_time.slice(0, 10)}
               </h1>
               {/* h2h */}
@@ -55,7 +55,7 @@ const Matches = () => {
                 {["1", "X", "2"].map((item, index) => (
                   <h1
                     key={index}
-                    className="w-[32%] flex items-center justify-center"
+                    className="w-[33.33%] flex items-center justify-center"
                   >
                     {item}
                   </h1>
@@ -64,7 +64,7 @@ const Matches = () => {
             </div>
 
             {/* Matches for this day */}
-            <div className="w-full bg-neutral-400 text-white py-[2px]">
+            <div className="w-full text-white">
               {matches.map((match, index) => (
                 <Match info={match} key={index} />
               ))}
