@@ -5,6 +5,7 @@ import SoccerContext from "../../contexts/SoccerContext";
 import MainContext from "../../contexts/MainContext";
 // components
 import MatchOnTicket from "./MatchOnTicket";
+import ErrorSuccess from "../ErrorSuccess";
 
 const MyTicket = () => {
   // context
@@ -12,11 +13,23 @@ const MyTicket = () => {
     myTicket: { matches, coeff, makings, stake },
     myTicket,
     setStake,
+    resetMyTicket,
   } = useContext(SoccerContext);
-  const { payTicket } = useContext(MainContext);
+  const {
+    payTicket,
+    activeUser: { money },
+  } = useContext(MainContext);
 
   // state for ok stake
   const [okStake, setOkStake] = useState(true);
+  // state for delete matches on ticket after pay
+  const [deleteAfterPay, setDeleteAfterPay] = useState(false);
+  // state for error in ticket - when user do not have money to pay
+  const [error, setError] = useState({
+    active: false,
+    message: "",
+    type: "error",
+  });
 
   useEffect(() => {
     isStakeOk();
@@ -26,11 +39,27 @@ const MyTicket = () => {
     setOkStake(stake < 1 || stake > 500 || stake === "" ? false : true);
   };
 
+  // handleCheckBox
+  const handleCheckBox = (e) => {
+    setDeleteAfterPay(e.target.checked);
+  };
+
   // handleClick
   const handleClick = () => {
     if (matches.length !== 0 && okStake) {
-      alert("success");
-      payTicket(myTicket);
+      setError({
+        active: true,
+        message: money < stake ? "Don't have money." : "Success.",
+        type: money < stake ? "error" : "success",
+      });
+      setTimeout(() => {
+        setError({ active: false, message: "", type: "error" });
+      }, 3000);
+
+      if (money > stake) {
+        payTicket(myTicket);
+        deleteAfterPay && resetMyTicket();
+      }
     }
   };
 
@@ -104,13 +133,22 @@ const MyTicket = () => {
             <label htmlFor="deleteAfterPay">Delete after pay</label>
             <input
               type="checkbox"
+              onChange={handleCheckBox}
               name="deleteAfterPay"
+              checked={deleteAfterPay}
               id="deleteAfterPay"
-              className="w-[20px] h-[20px]"
+              className="w-[20px] h-[20px] cursor-pointer"
             />
           </div>
         </div>
       </div>
+
+      {/* Error */}
+      {error.active && (
+        <div className="w-full px-2 my-2 ">
+          <ErrorSuccess message={error.message} type={error.type} />
+        </div>
+      )}
     </div>
   );
 };

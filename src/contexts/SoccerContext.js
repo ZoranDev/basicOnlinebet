@@ -74,6 +74,16 @@ export const SoccerContextProvider = ({ children }) => {
     value.length <= 4 && setMyTicket({ ...myTicket, stake: value });
   };
 
+  // resetMyTicket
+  const resetMyTicket = () => {
+    setMyTicket({
+      matches: [],
+      coeff: 1,
+      makings: 1,
+      stake: 1,
+    });
+  };
+
   return (
     <SoccerContext.Provider
       value={{
@@ -83,6 +93,7 @@ export const SoccerContextProvider = ({ children }) => {
         addToTicket,
         deleteFromTicket,
         setStake,
+        resetMyTicket,
       }}
     >
       {children}
