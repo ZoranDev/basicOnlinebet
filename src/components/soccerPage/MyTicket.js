@@ -15,10 +15,7 @@ const MyTicket = () => {
     setStake,
     resetMyTicket,
   } = useContext(SoccerContext);
-  const {
-    payTicket,
-    activeUser: { money },
-  } = useContext(MainContext);
+  const { payTicket, activeUser } = useContext(MainContext);
 
   // state for ok stake
   const [okStake, setOkStake] = useState(true);
@@ -46,7 +43,9 @@ const MyTicket = () => {
 
   // handleClick
   const handleClick = () => {
-    if (matches.length !== 0 && okStake) {
+    // if we have active user
+    let money = activeUser && activeUser.money;
+    if (matches.length !== 0 && okStake && activeUser) {
       setError({
         active: true,
         message: money < stake ? "Don't have money." : "Success.",
