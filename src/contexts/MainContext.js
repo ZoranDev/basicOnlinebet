@@ -86,21 +86,19 @@ export const MainContextProvider = ({ children }) => {
   // payTicket
   const payTicket = (myTicket) => {
     // if there is no active user redirect to logIn page
-    activeUser
-      ? setUsers(
-          users.map((user) => {
-            if (user.id === activeUser.id) {
-              let newTicket = {
-                id: getID(),
-                body: myTicket,
-              };
-              user.tickets.push(newTicket);
-              user.money = user.money - myTicket.stake;
-            }
-            return user;
-          })
-        )
-      : navigate("/login");
+    setUsers(
+      users.map((user) => {
+        if (user.id === activeUser.id) {
+          let newTicket = {
+            id: getID(),
+            body: myTicket,
+          };
+          user.tickets.push(newTicket);
+          user.money = user.money - myTicket.stake;
+        }
+        return user;
+      })
+    );
   };
 
   return (

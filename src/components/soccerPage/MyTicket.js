@@ -1,5 +1,7 @@
 // react
 import { useContext, useState, useEffect } from "react";
+// router dom
+import { useNavigate } from "react-router-dom";
 // context
 import SoccerContext from "../../contexts/SoccerContext";
 import MainContext from "../../contexts/MainContext";
@@ -36,6 +38,9 @@ const MyTicket = () => {
     setOkStake(stake < 1 || stake > 500 || stake === "" ? false : true);
   };
 
+  // navigate
+  const navigate = useNavigate();
+
   // handleCheckBox
   const handleCheckBox = (e) => {
     setDeleteAfterPay(e.target.checked);
@@ -43,14 +48,20 @@ const MyTicket = () => {
 
   // handleClick
   const handleClick = () => {
+    // if user isn't logged in redirect to login otherwise proceed
+    if (!activeUser) {
+      navigate("/login");
+      return;
+    }
     // if we have active user
-    let money = activeUser && activeUser.money;
-    if (matches.length !== 0 && okStake && activeUser) {
+    let money = activeUser.money;
+    if (matches.length !== 0 && okStake) {
       setError({
         active: true,
         message: money < stake ? "Don't have money." : "Success.",
         type: money < stake ? "error" : "success",
       });
+      // remove nottification
       setTimeout(() => {
         setError({ active: false, message: "", type: "error" });
       }, 3000);
