@@ -40,7 +40,7 @@ const Matches = () => {
   }
 
   return (
-    <div className="w-[57%] ">
+    <div className="w-full sm:w-[65%] sm:ml-2 sm:mr-5 md:w-[70%] lg:w-[57%] ">
       {sortArr.length !== 0 ? (
         sortArr.map((matches, index) => (
           <div key={index} className="mb-5">
@@ -51,7 +51,7 @@ const Matches = () => {
                 Date: {matches[0].commence_time.slice(0, 10)}
               </h1>
               {/* h2h */}
-              <div className="w-[30%] flex items-center justify-between">
+              <div className="w-[40%] flex items-center justify-between">
                 {["1", "X", "2"].map((item, index) => (
                   <h1
                     key={index}

@@ -35,7 +35,7 @@ const Odd = ({ info: { oddValue, id }, info }) => {
       onClick={onClick}
       className={`w-[33.33%] h-full ${
         onTicket ? "bg-blue-400" : " hover:bg-blue-400"
-      } flex items-center justify-center cursor-pointer `}
+      } flex items-center justify-center cursor-pointer text-sm `}
     >
       {oddValue}
     </button>

@@ -9,7 +9,7 @@ import MainContext from "../../contexts/MainContext";
 import MatchOnTicket from "./MatchOnTicket";
 import ErrorSuccess from "../ErrorSuccess";
 
-const MyTicket = () => {
+const MyTicket = ({ showMyTicket, handleShowMyTicket }) => {
   // context
   const {
     myTicket: { matches, coeff, makings, stake },
@@ -74,11 +74,24 @@ const MyTicket = () => {
   };
 
   return (
-    <div className="w-[20%] bg-neutral-400 rounded-tl-md rounded-tr-md overflow-hidden flex flex-col justify-center">
+    <div
+      id="myTickett"
+      className={`${
+        showMyTicket ? "translate-x-0" : "translate-x-[320px]"
+      } absolute w-[280px]  overflow-hidden absolute right-2  bg-neutral-400 rounded-tl-md rounded-tr-md overflow-hidden flex flex-col justify-start transition-[transform] duration-[700ms] lg:w-[20%] lg:relative  `}
+    >
       {/* Title */}
-      <h1 className="w-full px-4 py-2 bg-blue-500 text-white border-b-[1px] border-b-white">
-        My Ticket
-      </h1>
+      <div className="w-full px-4 py-2 bg-blue-500 text-white border-b-[1px] border-b-white flex items-center justify-between">
+        <h1>My Ticket</h1>
+        {showMyTicket && (
+          <div
+            onClick={handleShowMyTicket}
+            className="w-[20px] h-[20px] text-[10px] flex items-center justify-center cursor-pointer hover:scale-[1.2] hover:text-blue-500 hover:bg-white hover:rounded-full transition-all duration-[300ms] lg:hidden"
+          >
+            x
+          </div>
+        )}
+      </div>
 
       {/* Played matches */}
       <div className="p-2">

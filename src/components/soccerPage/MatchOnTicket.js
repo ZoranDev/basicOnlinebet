@@ -33,7 +33,7 @@ const MatchOnTicket = ({
           <h1>{away_team}</h1>
         </div>
         <div className="w-[70px] flex items-center justify-end text-sm">
-          <h1 className="w-[40px] h-[30px] mr-1 bg-blue-600 text-white flex items-center justify-center">
+          <h1 className="w-[40px] h-[30px] mr-1 bg-blue-400 text-white flex items-center justify-center">
             {game}
           </h1>
           <h1 className="w-[40px] h-[30px] bg-neutral-500 text-white flex items-center justify-center">

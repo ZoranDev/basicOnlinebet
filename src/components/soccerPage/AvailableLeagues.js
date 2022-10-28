@@ -40,7 +40,7 @@ const AvailableLeagues = () => {
   };
 
   return (
-    <div className="w-[20%]">
+    <div className="w-[280px] mb-5 sm:w-[35%] sm:mb-0 md:w-[30%] lg:w-[20%]">
       {/* Search component */}
       <div className="w-full h-[40px] mb-5 bg-neutral-400 relative rounded overflow-hidden">
         <FaSearch className="absolute left-2 top-2/4 -translate-y-2/4 text-blue-500 text-lg" />
