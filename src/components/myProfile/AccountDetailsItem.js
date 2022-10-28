@@ -71,9 +71,9 @@ const AccountDetailsItem = ({ id, title, text }) => {
   };
 
   return (
-    <div className="w-[280px] mb-4">
-      <h1 className="w-full mb-2 text-lg">{title}</h1>
-      <div className="w-full relative">
+    <div className="w-[full] mb-4 sm:w-[280px]">
+      <h1 className="w-full mb-2 text-lg text-neutral-700">{title}</h1>
+      <div className="w-[90%] relative">
         <input
           type="text"
           id={id}

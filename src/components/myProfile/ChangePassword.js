@@ -91,7 +91,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="w-[280px]">
+    <div className="w-full sm:w-[280px]">
       {[
         { id: "oldPassword", text: "Old password" },
         { id: "newPassword", text: "New password" },
@@ -122,11 +122,11 @@ const ChangePassword = () => {
       {/* Change btn */}
       <button
         onClick={handleChangePasswordClick}
-        className={`w-[280px] py-2 px-2 my-4 ${
+        className={`w-full py-2 px-2 my-4 ${
           okData.old && okData.new && okData.newRepeat
             ? "bg-blue-400 text-white cursor-pointer hover:bg-blue-500"
             : "bg-zinc-300 text-zinc-400 cursor-not-allowed"
-        } transform-colors duration-[300ms] flex items-center justify-center rounded`}
+        } transform-colors duration-[300ms] flex items-center justify-center rounded sm:w-[280px]`}
       >
         <FaLock className="text-lg mr-2" />
         Change password

@@ -7,8 +7,6 @@ import AccountDetails from "./AccountDetails";
 import ChangePassword from "./ChangePassword";
 import Payment from "./Payment";
 import MyTicktes from "./MyTicktes";
-// icons
-import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const MyProfile = () => {
   // state for active info
@@ -21,8 +19,8 @@ const MyProfile = () => {
   }, [params]);
 
   return (
-    <div className="w-[80%] mx-auto my-10 flex items-start relative">
-      <div className="w-[30%]">
+    <div className="w-[90%]  mx-auto my-10 flex flex-col items-start relative sm:flex-row">
+      <div className="w-full sm:w-[30%]">
         <h1 className="w-full bg-zinc-700 px-3 py-2 text-white">
           Profile settings
         </h1>
@@ -48,7 +46,7 @@ const MyProfile = () => {
         ))}
       </div>
 
-      <div className="w-[70%] min-h-[300px] p-5 px-10 bg-zinc-400">
+      <div className="w-full min-h-[300px] mb-2 px-2 py-2 bg-zinc-400 sm:w-[70%] sm:px-10">
         <Routes>
           <Route path={`/accountDetails`} element={<AccountDetails />} />
           <Route path="/changePassword" element={<ChangePassword />} />
@@ -61,7 +59,9 @@ const MyProfile = () => {
       <Link
         to="/soccer"
         children={
-          <AiOutlineCloseCircle className="absolute right-2 top-2 text-2xl text-white hover:text-blue-500 transition-colors duration-[300ms] cursor-pointer" />
+          <h1 className="w-[30px] h-[30px] absolute right-2 top-1 text-[12px] text-white rounded-full flex items-center justify-center hover:text-zinc-700 hover:bg-white transition-colors duration-[300ms] cursor-pointer">
+            x
+          </h1>
         }
       />
     </div>

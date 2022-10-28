@@ -156,12 +156,12 @@ const Payment = () => {
   };
 
   return (
-    <div className="max-w-[400px]">
+    <div className="max-w-[400px] text-neutral-700">
       {/* Card number */}
       <div className="w-full mb-2">
         <h2 className="w-full mb-2 text-lg bg-transparent">Card number:</h2>
         <div
-          className={`bg-white  h-[50px] py-2 px-4 flex items-center justify-between`}
+          className={`bg-zinc-200  h-[50px] py-2 px-4 flex items-center justify-between`}
         >
           {["num1", "num2", "num3", "num4"].map((item, index) => (
             <input
@@ -181,7 +181,7 @@ const Payment = () => {
               id={item}
               maxLength={4}
               placeholder="0000"
-              className="w-[50px] py-1 text-center text-lg bg-transparent border-0 placeholder:text-black focus:outline-0 sm:px-2 sm:w-[80px]"
+              className="w-[50px] py-1 text-center text-lg bg-transparent border-0  focus:outline-0 sm:px-2 sm:w-[80px]"
             />
           ))}
         </div>
@@ -199,7 +199,7 @@ const Payment = () => {
             name="expireMonth"
             id="month"
             value={creditCardInfo.expireMonth}
-            className="h-full max-w-[100px] mr-1 py-2 px-4 cursor-pointer text-lg focus:outline-0"
+            className="h-full max-w-[100px] mr-1 py-2 px-4 bg-zinc-200 cursor-pointer text-lg focus:outline-0"
             onChange={handleOnChange}
           >
             <option value="default">MM</option>
@@ -215,7 +215,7 @@ const Payment = () => {
             id="year"
             value={creditCardInfo.expireYear}
             onChange={handleOnChange}
-            className="h-full max-w-[100px] py-2 px-4 cursor-pointer text-lg focus:outline-0"
+            className="h-full max-w-[100px] py-2 px-4 bg-zinc-200 cursor-pointer text-lg focus:outline-0"
           >
             <option value="default">YY</option>
             {[0, 1, 2, 3, 4, 5, 6, 7, 9].map((item, index) => (
@@ -232,14 +232,14 @@ const Payment = () => {
 
       {/* CVC */}
       <div className="w-full mb-2">
-        <h2 className="w-full mb-2 text-lg bg-transparent">CVC</h2>
+        <h2 className="w-full mb-2 text-lg bg-transparen">CVC</h2>
         <div className="h-[50px] relative ">
-          <div className="max-w-[100px] h-full flex items-center justify-between relative">
+          <div className="max-w-[100px] h-full flex items-center justify-between relative ">
             <input
               type="text"
               name="cvc"
               placeholder="CVC"
-              className="w-full h-full py-2 px-4 text-lg border-0 focus:outline-0 text-left  placeholder:text-black"
+              className="w-full h-full py-2 px-4 bg-zinc-200 text-lg border-0 focus:outline-0 text-left "
               id="cvc"
               maxLength={3}
               value={creditCardInfo.cvc}
@@ -265,13 +265,15 @@ const Payment = () => {
 
       {/* How much to pay in */}
       <div className="w-full">
-        <h2 className="w-full mb-2 text-lg bg-transparent">Amount</h2>
+        <h2 className="w-full mb-2 text-lg bg-transparent text-neutral-700">
+          Amount
+        </h2>
         <div className="h-[50px] relative ">
           <div className="max-w-[100px] h-full border-0 flex items-center justify-between relative focus:outline-0">
             <input
               type="number"
               name="payMoney"
-              className="w-full h-full py-2 px-4 text-lg border-0 focus:outline-0 text-left  placeholder:text-black"
+              className="w-full h-full py-2 px-4 bg-zinc-200 text-lg border-0 focus:outline-0 text-left  placeholder:text-black"
               id="payMoney"
               min={5}
               max={500}
@@ -289,11 +291,11 @@ const Payment = () => {
       {/* Pay money button */}
       <button
         onClick={handlePayMoney}
-        className={`w-[280px] py-2 px-2 my-4 ${
+        className={`w-full py-2 px-2 my-4 ${
           canMoveOn()
             ? "bg-blue-400 text-white cursor-pointer hover:bg-blue-500"
             : "bg-zinc-300 text-zinc-400 cursor-not-allowed"
-        } transform-colors duration-[300ms] flex items-center justify-center rounded`}
+        } transform-colors duration-[300ms] flex items-center justify-center rounded sm:w-[280px]`}
       >
         Pay
       </button>

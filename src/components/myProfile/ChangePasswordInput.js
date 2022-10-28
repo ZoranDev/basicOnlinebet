@@ -14,10 +14,10 @@ const ChangePasswordInput = ({ id, text, fillInputData, value, okData }) => {
 
   return (
     <div className={`flex flex-col mb-4 `}>
-      <label htmlFor={id} className="mb-2 text-lg">
+      <label htmlFor={id} className="mb-2 text-lg text-neutral-700">
         {text}
       </label>
-      <div className="w-[280px] relative bg-red-200">
+      <div className="w-full relative bg-red-200 sm:w-[280px]">
         <input
           type={showPassword ? "text" : "password"}
           name={id}
