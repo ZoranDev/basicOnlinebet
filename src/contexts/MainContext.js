@@ -1,5 +1,5 @@
 // react
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 // router dom
 import { useNavigate } from "react-router-dom";
 // uuid
@@ -12,6 +12,22 @@ export const MainContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   // active user
   const [activeUser, setActiveUser] = useState(null);
+  // State for show navbar - this is here because we need to hide navbar when app is in small screens - on click: soccer, login, payin btn, myProfile and logout
+  const [showNavbar, setShowNavbar] = useState(true);
+
+  useEffect(() => {
+    window.innerWidth < 640 ? setShowNavbar(false) : setShowNavbar(true);
+  }, []);
+
+  // show hide navbar based on screen width
+  window.addEventListener("resize", () => {
+    window.innerWidth > 640 ? setShowNavbar(true) : setShowNavbar(false);
+  });
+
+  // handle click on element to do something with show navbar
+  const handleShowNavbar = (show) => {
+    setShowNavbar(show);
+  };
 
   // navigate
   const navigate = useNavigate();
@@ -106,6 +122,8 @@ export const MainContextProvider = ({ children }) => {
       value={{
         users,
         activeUser,
+        showNavbar,
+        handleShowNavbar,
         createNewuser,
         logUser,
         logOut,

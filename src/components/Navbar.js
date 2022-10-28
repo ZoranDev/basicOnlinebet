@@ -1,5 +1,5 @@
 // react
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 // router
 import { Link } from "react-router-dom";
 // context
@@ -12,25 +12,22 @@ import { FaBars, FaWindowClose } from "react-icons/fa";
 
 const Navbar = () => {
   // context
-  const { activeUser } = useContext(MainContext);
+  const { activeUser, showNavbar, handleShowNavbar } = useContext(MainContext);
 
-  // State for show navbar
-  const [showNavbar, setShowNavbar] = useState(true);
-
-  //showHideNavbar
-  const showHideNavbar = () => {
-    setShowNavbar(!showNavbar);
+  // handleClickOnSoccer - on small screens when user click to redirect to soccer nav remains open and we want it to be closed
+  const handleClickOnSoccer = () => {
+    window.innerWidth > 640 ? handleShowNavbar(true) : handleShowNavbar(false);
   };
 
-  useEffect(() => {
-    // otherwise when app is open directly on small screens shownav is true
-    window.innerWidth < 640 ? setShowNavbar(false) : setShowNavbar(true);
-  }, []);
+  // handleBarsClick - to show navbar
+  const handleBarsClick = () => {
+    handleShowNavbar(true);
+  };
 
-  // show hide navbar based on screen width
-  window.addEventListener("resize", () => {
-    window.innerWidth > 640 ? setShowNavbar(true) : setShowNavbar(false);
-  });
+  // handleCloseClick - to close navbar
+  const handleCloseClick = () => {
+    handleShowNavbar(false);
+  };
 
   return (
     <div className="w-full h-[60px] px-5 py-2 bg-zinc-800 flex flex items-center justify-between relative z-20 ">
@@ -46,7 +43,10 @@ const Navbar = () => {
           <Link
             to="/soccer"
             children={
-              <h1 className="mb-3 text-xl text-white capitalize cursor-pointer hover:text-blue-700 hover:transition-colors hover:duration-[400ms] sm:mb-0">
+              <h1
+                onClick={handleClickOnSoccer}
+                className="mb-3 text-xl text-white capitalize cursor-pointer hover:text-blue-700 hover:transition-colors hover:duration-[400ms] sm:mb-0"
+              >
                 Soccer
               </h1>
             }
@@ -63,12 +63,12 @@ const Navbar = () => {
       {/* Menu icon */}
       {!showNavbar ? (
         <FaBars
-          onClick={showHideNavbar}
+          onClick={handleBarsClick}
           className="text-2xl text-white cursor-pointer hover:text-blue-700 transition-colors duration-[300ms] sm:hidden"
         />
       ) : (
         <FaWindowClose
-          onClick={showHideNavbar}
+          onClick={handleCloseClick}
           className="text-2xl text-white cursor-pointer hover:text-blue-700 transition-colors duration-[300ms] sm:hidden"
         />
       )}

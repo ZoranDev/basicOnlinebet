@@ -11,7 +11,7 @@ import { BiUserCircle, BiLogOut } from "react-icons/bi";
 
 const NavbarActiveUser = () => {
   // context
-  const { activeUser, logOut } = useContext(MainContext);
+  const { activeUser, logOut, handleShowNavbar } = useContext(MainContext);
 
   // state for show money
   const [showMoney, setShowMoney] = useState(true);
@@ -29,10 +29,22 @@ const NavbarActiveUser = () => {
     setShowUserInfo(!showUserInfo);
   };
 
+  // handleMyProfileClick
+  const handleMyProfileClick = () => {
+    handleShowUserInfo();
+    closeNavbar();
+  };
+
   // handleLogOut
   const handleLogOut = () => {
     handleShowUserInfo();
+    closeNavbar();
     logOut();
+  };
+
+  // closeNavbar
+  const closeNavbar = () => {
+    handleShowNavbar(false);
   };
 
   return (
@@ -61,7 +73,7 @@ const NavbarActiveUser = () => {
         <Link
           className="h-full bg-blue-500 px-3 text-white hover:bg-blue-400 flex"
           to="/myProfile/payment"
-          children={<button>+ Pay In</button>}
+          children={<button onClick={closeNavbar}>+ Pay In</button>}
         />
       </div>
       {/* My proflie */}
@@ -86,7 +98,7 @@ const NavbarActiveUser = () => {
           to="/myProfile/accountDetails"
           children={
             <div
-              onClick={handleShowUserInfo}
+              onClick={handleMyProfileClick}
               className="w-full h-[50px] px-3  flex items-center justify-start text-white hover:bg-blue-500 hover:text-white hover:cursor-pointer  transition-colors duration-[200ms]"
             >
               <BiUserCircle className="text-2xl mr-1" />
