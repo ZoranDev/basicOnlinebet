@@ -80,7 +80,7 @@ const NavbarActiveUser = () => {
       <div
         className={`w-[300px] ${
           !showUserInfo ? "h-0" : "h-[100px]"
-        } transition-[height] duration-[300ms] bg-zinc-800 absolute top-[53px] -right-[20px] z-20 overflow-hidden`}
+        } transition-[height] duration-[300ms] bg-zinc-800 absolute top-[37px] -right-[20px] z-20 overflow-hidden sm:top-[53px]`}
       >
         <Link
           to="/myProfile/accountDetails"
