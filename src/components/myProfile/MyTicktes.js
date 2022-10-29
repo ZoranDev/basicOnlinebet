@@ -19,7 +19,7 @@ const MyTicktes = () => {
         <div>
           <h1>No tickets yet.</h1>
           <Link
-            to="/soccer"
+            to="/"
             children={
               <button
                 className={`w-[280px] py-2 px-2 my-4 bg-blue-400 text-white cursor-pointer hover:bg-blue-500 transform-colors duration-[300ms] flex items-center justify-center rounded`}
