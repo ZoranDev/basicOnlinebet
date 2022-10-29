@@ -41,7 +41,7 @@ export const MainContextProvider = ({ children }) => {
     // then add new user to existing users
     setUsers([...users, newUser]);
     setActiveUser(newUser);
-    navigate("/soccer");
+    navigate("/");
   };
 
   // logUser
@@ -53,13 +53,13 @@ export const MainContextProvider = ({ children }) => {
       }
     });
     setActiveUser(newActiveUser);
-    navigate("/soccer");
+    navigate("/");
   };
 
   // logOut
   const logOut = () => {
     setActiveUser(null);
-    navigate("/soccer");
+    navigate("/");
   };
 
   // changePassword
@@ -101,7 +101,6 @@ export const MainContextProvider = ({ children }) => {
 
   // payTicket
   const payTicket = (myTicket) => {
-    // if there is no active user redirect to logIn page
     setUsers(
       users.map((user) => {
         if (user.id === activeUser.id) {

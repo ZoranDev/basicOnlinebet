@@ -57,7 +57,7 @@ const MyProfile = () => {
 
       {/* Close my profile info */}
       <Link
-        to="/soccer"
+        to="/"
         children={
           <h1 className="w-[30px] h-[30px] absolute right-2 top-1 text-[12px] text-white rounded-full flex items-center justify-center hover:text-zinc-700 hover:bg-white transition-colors duration-[300ms] cursor-pointer">
             x

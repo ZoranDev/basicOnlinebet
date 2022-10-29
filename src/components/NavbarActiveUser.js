@@ -88,7 +88,7 @@ const NavbarActiveUser = () => {
 
       {/* User info */}
 
-      {/*  -52px da bi bilo poravnato jer je na navbar padding py-2, 53 da bude malo spusteno */}
+      {/*  -52px da bi bilo poravnato jer je na navbar padding py-2, 53 da bude malo spusteno za large screens*/}
       <div
         className={`w-full ${
           !showUserInfo ? "h-0" : "h-[100px]"

@@ -5,6 +5,8 @@ const SoccerContext = createContext();
 export const SoccerContextProvider = ({ children }) => {
   // state for matches of the league that we want to show
   const [matchesToShow, setMatchesToShow] = useState(null);
+  // state for displayed league
+  const [displayedLeague, setDisplayedLeague] = useState("soccer_epl");
 
   // state for my ticket
   const [myTicket, setMyTicket] = useState({
@@ -13,6 +15,11 @@ export const SoccerContextProvider = ({ children }) => {
     makings: 1,
     stake: 1,
   });
+
+  // on start always fetch england premier leaguse
+  useEffect(() => {
+    getLeagueInfo(displayedLeague);
+  }, []);
 
   // every change of played matches either add or remove trigger this function
   useEffect(() => {
@@ -42,6 +49,7 @@ export const SoccerContextProvider = ({ children }) => {
     const data = await response.json();
 
     setMatchesToShow(data);
+    setDisplayedLeague(league);
   };
 
   // addToTicket
@@ -89,6 +97,7 @@ export const SoccerContextProvider = ({ children }) => {
       value={{
         matchesToShow,
         myTicket,
+        displayedLeague,
         getLeagueInfo,
         addToTicket,
         deleteFromTicket,

@@ -4,6 +4,8 @@ import { useContext } from "react";
 import SoccerContext from "../../contexts/SoccerContext";
 // components
 import Match from "./Match";
+// icons
+import { FaAngleLeft } from "react-icons/fa";
 
 const Matches = () => {
   // context
@@ -72,7 +74,11 @@ const Matches = () => {
           </div>
         ))
       ) : (
-        <div>Select LEAGUE</div>
+        /* This is just if something is wrong with fetch, first always load england premier league */
+        <div className="w-full text-xl text-white sm:w-[65%] sm:ml-2 sm:mr-5 md:w-[70%] lg:w-[57%] ">
+          <h1> Please select some league from left.</h1>
+          <FaAngleLeft className="mt-2 text-[50px]" />
+        </div>
       )}
     </div>
   );

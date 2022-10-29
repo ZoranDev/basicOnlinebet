@@ -18,7 +18,7 @@ function App() {
           <div className="bg-neutral-600 min-h-screen">
             <Navbar />
             <Routes>
-              <Route path="/soccer" element={<Soccer />} />
+              <Route path="/" element={<Soccer />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/myProfile/*" element={<MyProfile />} />
             </Routes>

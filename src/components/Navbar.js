@@ -41,7 +41,7 @@ const Navbar = () => {
       {showNavbar && (
         <div className="w-full py-3 flex flex-col bg-zinc-700 items-center justify-start absolute top-[60px] left-0 sm:w-[70%] sm:relative sm:top-0  sm:flex-row sm:py-0 sm:justify-between sm:bg-transparent sm:h-full lg:w-2/4">
           <Link
-            to="/soccer"
+            to="/"
             children={
               <h1
                 onClick={handleClickOnSoccer}

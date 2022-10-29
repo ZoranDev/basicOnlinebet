@@ -1,5 +1,5 @@
 // react
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 // context
 import SoccerContext from "../../contexts/SoccerContext";
 // icons
@@ -9,7 +9,7 @@ const MatchOnTicket = ({
   info: { id, game, oddValue, commence_time, home_team, away_team },
 }) => {
   // context
-  const { matchesToShow, deleteFromTicket } = useContext(SoccerContext);
+  const { deleteFromTicket } = useContext(SoccerContext);
 
   // handleOnClick
   const handleOnClick = () => {

@@ -19,8 +19,6 @@ const leagues = [
 const AvailableLeagues = () => {
   // state for non filtered array of leagues
   const [displayedLeagues, setdisplayedLeagues] = useState(leagues);
-  // state for current displayed league
-  const [currentLeague, setCurrentLeague] = useState(null);
 
   // filter leagues
   const filterLeagues = (e) => {
@@ -28,15 +26,10 @@ const AvailableLeagues = () => {
     value === ""
       ? setdisplayedLeagues(leagues)
       : setdisplayedLeagues(
-          displayedLeagues.filter((item) =>
+          leagues.filter((item) =>
             item.name.toLowerCase().includes(e.target.value.toLowerCase())
           )
         );
-  };
-
-  // setLeague
-  const setLeague = (fetchKey) => {
-    setCurrentLeague(fetchKey);
   };
 
   return (
@@ -54,13 +47,7 @@ const AvailableLeagues = () => {
 
       <h1 className="mb-2 text-md text-white">Available leagues</h1>
       {displayedLeagues.map((item, index) => (
-        <LeagueBtn
-          key={index}
-          text={item.name}
-          fetchKey={item.key}
-          currentLeague={currentLeague}
-          setLeague={setLeague}
-        />
+        <LeagueBtn key={index} text={item.name} fetchKey={item.key} />
       ))}
     </div>
   );
