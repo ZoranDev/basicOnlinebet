@@ -44,11 +44,11 @@ const NavbarActiveUser = () => {
 
   // closeNavbar
   const closeNavbar = () => {
-    handleShowNavbar(false);
+    window.innerWidth > 640 ? handleShowNavbar(true) : handleShowNavbar(false);
   };
 
   return (
-    <div className="flex items-center h-full relative">
+    <div className="flex items-center h-[44px] ">
       {/* Available money and pay btn */}
       <div className="h-full flex items-center overflow-hidden rounded-[25px]">
         {/* Money */}
@@ -90,9 +90,9 @@ const NavbarActiveUser = () => {
 
       {/*  -52px da bi bilo poravnato jer je na navbar padding py-2, 53 da bude malo spusteno */}
       <div
-        className={`w-[300px] ${
+        className={`w-full ${
           !showUserInfo ? "h-0" : "h-[100px]"
-        } transition-[height] duration-[300ms] bg-zinc-800 absolute top-[37px] -right-[20px] z-20 overflow-hidden sm:top-[53px]`}
+        } transition-[height] duration-[300ms] bg-zinc-800 absolute top-[108px] right-0 z-20 overflow-hidden sm:top-[53px] sm:w-[300px] sm:right-[-20px]`}
       >
         <Link
           to="/myProfile/accountDetails"

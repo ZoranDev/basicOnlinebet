@@ -9,7 +9,7 @@ const Button = ({ text }) => {
 
   // handleClick
   const handleClick = () => {
-    handleShowNavbar(false);
+    window.innerWidth > 640 ? handleShowNavbar(true) : handleShowNavbar(false);
   };
 
   return (
