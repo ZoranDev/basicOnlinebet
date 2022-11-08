@@ -1,10 +1,10 @@
 // react
 import { useState, useEffect, useContext } from "react";
+// context
+import UsersContext from "../../contexts/UsersContext";
 // components
 import ChangePasswordInput from "./ChangePasswordInput";
 import ErrorSuccess from "../ErrorSuccess";
-// context
-import UsersContext from "../../contexts/UsersContext";
 // icons
 import { FaLock } from "react-icons/fa";
 
@@ -21,7 +21,7 @@ const ChangePassword = () => {
     newPassword: "",
     repeatNewPassword: "",
   });
-  // state for okData
+  // state for okData - null if value is '', true if oldPassword === current password or new password === repeated password
   const [okData, setOkData] = useState({
     old: null,
     new: null,
@@ -36,18 +36,16 @@ const ChangePassword = () => {
 
   // if data  === '' its value is null and border has default color, if value is false border is red otherwise is green
   useEffect(() => {
+    let oldPassword = inputData.oldPassword;
+    let newPassword = inputData.newPassword;
+    let repeatNewPassword = inputData.repeatNewPassword;
     setOkData({
-      old:
-        inputData.oldPassword === ""
-          ? null
-          : inputData.oldPassword === password
-          ? true
-          : false,
-      new: inputData.newPassword === "" ? null : true,
+      old: oldPassword === "" ? null : oldPassword === password ? true : false,
+      new: newPassword === "" ? null : true,
       newRepeat:
-        inputData.repeatNewPassword === ""
+        repeatNewPassword === ""
           ? null
-          : inputData.repeatNewPassword === inputData.newPassword
+          : repeatNewPassword === inputData.newPassword
           ? true
           : false,
     });
@@ -71,8 +69,10 @@ const ChangePassword = () => {
     }, 3000);
   };
 
-  // handleChangePasswordClick
-  const handleChangePasswordClick = () => {
+  // updatePassword
+  const updatePassword = (e) => {
+    e.preventDefault();
+    // if all data are ok then check if new password is same as old password
     if (okData.old && okData.new && okData.newRepeat) {
       setError({
         active: true,
@@ -85,13 +85,15 @@ const ChangePassword = () => {
       if (password === inputData.newPassword) {
         return;
       }
-      resetState();
+      // update password
       updateUserProp("password", inputData.newPassword);
+      // reset state
+      resetState();
     }
   };
 
   return (
-    <div className="w-full sm:w-[280px]">
+    <form onSubmit={updatePassword} className="w-full sm:w-[280px]">
       {[
         { id: "oldPassword", text: "Old password" },
         { id: "newPassword", text: "New password" },
@@ -121,7 +123,7 @@ const ChangePassword = () => {
 
       {/* Change btn */}
       <button
-        onClick={handleChangePasswordClick}
+        type="submit"
         className={`w-full py-2 px-2 my-4 ${
           okData.old && okData.new && okData.newRepeat
             ? "bg-blue-400 text-white cursor-pointer hover:bg-blue-500"
@@ -136,7 +138,7 @@ const ChangePassword = () => {
       {error.active && (
         <ErrorSuccess message={error.message} type={error.type} />
       )}
-    </div>
+    </form>
   );
 };
 
