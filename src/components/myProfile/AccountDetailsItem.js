@@ -1,5 +1,5 @@
 // react
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 // context
 import UsersContext from "../../contexts/UsersContext";
 // components
@@ -7,6 +7,10 @@ import ErrorSuccess from "../ErrorSuccess";
 // icons
 import { AiFillEdit } from "react-icons/ai";
 import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
+
+// Check if value has some character
+let hasChar = /[a-zA-Z]/g;
+let hasNumber = /\d/;
 
 const AccountDetailsItem = ({ id, title, text }) => {
   // context
@@ -18,56 +22,60 @@ const AccountDetailsItem = ({ id, title, text }) => {
   const [disabled, setDisabled] = useState(true);
   // state for error in info
   const [errorInInfo, setErrorInInfo] = useState(false);
-  // state for error - to display when success mozda ovo promjeniti naziv komponente i ubaciti to kako treba
-  const [error, setError] = useState({
+  // state for show success message - show message after one item is updated
+  const [showSuccessMessage, setShowSuccessMessage] = useState({
     active: false,
     message: "",
-    type: "error",
   });
 
-  // handleEditInfo
-  const handleEditInfo = (e) => {
-    if (disabled) {
+  // enableEdit
+  const enableEdit = () => {
+    setDisabled(false);
+  };
+
+  useEffect(() => {
+    if (!disabled) {
       document.querySelector(`#${id}`).disabled = false;
       document.querySelector(`#${id}`).focus();
     } else {
       document.querySelector(`#${id}`).disabled = true;
     }
-    setDisabled(!disabled);
-  };
-
-  // Check if value has some character
-  let hasChar = /[a-zA-Z]/g;
-  let hasNumber = /\d/;
+  }, [disabled]);
 
   // handleOnChange
   const handleOnChange = (e) => {
     let value = e.target.value;
-    setErrorInInfo(false);
-    id === "userName" && hasNumber.test(value) && setErrorInInfo(true);
-    id === "phone" && hasChar.test(value) && setErrorInInfo(true);
     setInfo(e.target.value);
+    // check to see if info contains error (if user name contains number or phone contains character)
+    setErrorInInfo(
+      (id === "userName" && hasNumber.test(value)) ||
+        (id === "phone" && hasChar.test(value))
+        ? true
+        : false
+    );
   };
 
-  // handleSubmitChanges
-  const handleSubmitChanges = () => {
+  // submitChanges
+  const submitChanges = () => {
     if (!errorInInfo) {
+      // upd info
       updateUserProp(id, info);
-      /* updateUserPersonalDetails(id, info); */
-      handleEditInfo();
-      setError({
+      // make it disabled again
+      setDisabled(true);
+      // show success message
+      setShowSuccessMessage({
         active: true,
         message: `Account ${title} updated!`,
-        type: "success",
       });
-      removeError();
+      // after 3 sec remove success message
+      removeSuccessMessage();
     }
   };
 
-  // remove error
-  const removeError = () => {
+  // remove success message
+  const removeSuccessMessage = () => {
     setTimeout(() => {
-      setError({ active: false, message: "", type: "error" });
+      setShowSuccessMessage({ active: false, message: "" });
     }, 3000);
   };
 
@@ -89,12 +97,12 @@ const AccountDetailsItem = ({ id, title, text }) => {
         {id !== "email" &&
           (disabled ? (
             <AiFillEdit
-              onClick={handleEditInfo}
+              onClick={enableEdit}
               className="absolute -right-7 top-2/4 -translate-y-2/4 text-2xl cursor-pointer text-zinc-600 hover:text-blue-600 transition duration-[300ms] hover:scale-[1.2]"
             />
           ) : (
             <FaCheck
-              onClick={handleSubmitChanges}
+              onClick={submitChanges}
               className="absolute -right-7 top-2/4 -translate-y-2/4 text-2xl cursor-pointer text-zinc-600 hover:text-blue-600 transition duration-[300ms] hover:scale-[1.2]"
             />
           ))}
@@ -105,8 +113,8 @@ const AccountDetailsItem = ({ id, title, text }) => {
         </div>
       )}
       {/* Show success after updated */}
-      {error.active && (
-        <ErrorSuccess message={error.message} type={error.type} />
+      {showSuccessMessage.active && (
+        <ErrorSuccess message={showSuccessMessage.message} type={"success"} />
       )}
     </div>
   );
