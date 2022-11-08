@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 // router
 import { Link, useLocation } from "react-router-dom";
 // context
-import MainContext from "../contexts/MainContext";
+import UsersContext from "../contexts/UsersContext";
 // components
 import NavbarActiveUser from "./NavbarActiveUser";
 // icons
@@ -11,7 +11,7 @@ import { FaBars, FaWindowClose } from "react-icons/fa";
 
 const Navbar = () => {
   // context
-  const { activeUser } = useContext(MainContext);
+  const { activeUser } = useContext(UsersContext);
 
   // state for showNavbar
   const [showNavbar, setShowNavbar] = useState(true);

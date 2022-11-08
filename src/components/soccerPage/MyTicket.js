@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // context
 import SoccerContext from "../../contexts/SoccerContext";
-import MainContext from "../../contexts/MainContext";
+import UsersContext from "../../contexts/UsersContext";
 // components
 import MatchOnTicket from "./MatchOnTicket";
 import ErrorSuccess from "../ErrorSuccess";
@@ -17,7 +17,7 @@ const MyTicket = ({ showMyTicket, handleShowMyTicket }) => {
     setStake,
     resetMyTicket,
   } = useContext(SoccerContext);
-  const { payTicket, activeUser } = useContext(MainContext);
+  const { payTicket, activeUser } = useContext(UsersContext);
 
   // state for ok stake
   const [okStake, setOkStake] = useState(true);

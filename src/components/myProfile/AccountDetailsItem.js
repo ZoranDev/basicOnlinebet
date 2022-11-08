@@ -1,7 +1,7 @@
 // react
 import { useState, useContext } from "react";
 // context
-import MainContext from "../../contexts/MainContext";
+import UsersContext from "../../contexts/UsersContext";
 // components
 import ErrorSuccess from "../ErrorSuccess";
 // icons
@@ -10,7 +10,7 @@ import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
 
 const AccountDetailsItem = ({ id, title, text }) => {
   // context
-  const { updateUserPersonalDetails } = useContext(MainContext);
+  const { updateUserPersonalDetails } = useContext(UsersContext);
 
   // state for component info
   const [info, setInfo] = useState(text);

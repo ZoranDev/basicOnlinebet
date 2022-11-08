@@ -1,7 +1,7 @@
 // react
 import { useContext } from "react";
 // context
-import MainContext from "../../contexts/MainContext";
+import UsersContext from "../../contexts/UsersContext";
 // components
 import AccountDetailsItem from "./AccountDetailsItem";
 
@@ -9,7 +9,7 @@ const AccountDetails = () => {
   // context
   const {
     activeUser: { email, userName, phone },
-  } = useContext(MainContext);
+  } = useContext(UsersContext);
 
   return (
     <div className="w-full flex flex-col">

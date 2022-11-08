@@ -3,7 +3,7 @@ import { useContext } from "react";
 // router dom
 import { Link } from "react-router-dom";
 // context
-import MainContext from "../../contexts/MainContext";
+import UsersContext from "../../contexts/UsersContext";
 // components
 import SingleTicket from "./SingleTicket";
 
@@ -11,7 +11,7 @@ const MyTicktes = () => {
   // context
   const {
     activeUser: { tickets },
-  } = useContext(MainContext);
+  } = useContext(UsersContext);
 
   return (
     <div>

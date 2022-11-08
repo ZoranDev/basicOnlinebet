@@ -1,7 +1,7 @@
 // react
 import { useState, useContext, useEffect } from "react";
 // context
-import MainContext from "../contexts/MainContext";
+import UsersContext from "../contexts/UsersContext";
 // router dom
 import { Link, useLocation } from "react-router-dom";
 // icons
@@ -11,7 +11,7 @@ import { BiUserCircle, BiLogOut } from "react-icons/bi";
 
 const NavbarActiveUser = () => {
   // context
-  const { activeUser, logOut } = useContext(MainContext);
+  const { activeUser, logOut } = useContext(UsersContext);
 
   // state for show money
   const [showMoney, setShowMoney] = useState(true);

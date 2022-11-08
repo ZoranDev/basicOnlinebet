@@ -1,7 +1,7 @@
 // react
 import { useState, useEffect, useContext } from "react";
 // context
-import MainContext from "../../contexts/MainContext";
+import UsersContext from "../../contexts/UsersContext";
 // components
 import ErrorSuccess from "../ErrorSuccess";
 // Icons
@@ -12,7 +12,7 @@ const currentYear = new Date().getFullYear();
 
 const Payment = () => {
   // context
-  const { updateUserMoney } = useContext(MainContext);
+  const { updateUserMoney } = useContext(UsersContext);
 
   // state for credit card info
   const [creditCardInfo, setCreditCardInfo] = useState({

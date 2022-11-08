@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 // uuid
 import { v4 as getID } from "uuid";
 
-const MainContext = createContext();
+const UsersContext = createContext();
 
-export const MainContextProvider = ({ children }) => {
+export const UsersContextProvider = ({ children }) => {
   // users
   const [users, setUsers] = useState([]);
   // active user
@@ -101,7 +101,7 @@ export const MainContextProvider = ({ children }) => {
   };
 
   return (
-    <MainContext.Provider
+    <UsersContext.Provider
       value={{
         users,
         activeUser,
@@ -115,8 +115,8 @@ export const MainContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </MainContext.Provider>
+    </UsersContext.Provider>
   );
 };
 
-export default MainContext;
+export default UsersContext;

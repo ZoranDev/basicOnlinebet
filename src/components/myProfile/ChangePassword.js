@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import ChangePasswordInput from "./ChangePasswordInput";
 import ErrorSuccess from "../ErrorSuccess";
 // context
-import MainContext from "../../contexts/MainContext";
+import UsersContext from "../../contexts/UsersContext";
 // icons
 import { FaLock } from "react-icons/fa";
 
@@ -13,7 +13,7 @@ const ChangePassword = () => {
   const {
     activeUser: { password },
     changePassword,
-  } = useContext(MainContext);
+  } = useContext(UsersContext);
 
   // state for input fields
   const [inputData, setInputData] = useState({

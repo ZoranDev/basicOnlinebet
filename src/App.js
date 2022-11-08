@@ -1,7 +1,7 @@
 // router
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // context
-import { MainContextProvider } from "./contexts/MainContext";
+import { UsersContextProvider } from "./contexts/UsersContext";
 import { SoccerContextProvider } from "./contexts/SoccerContext";
 // components
 import Navbar from "./components/Navbar";
@@ -14,7 +14,7 @@ function App() {
     <Router>
       {/*  Odje obmotavam sve u soccer context jer u suprotnom bi mi se resetovao kad se resetuje i main context i onda gubim api pokusaje */}
       <SoccerContextProvider>
-        <MainContextProvider>
+        <UsersContextProvider>
           <div className="bg-neutral-600 min-h-screen">
             <Navbar />
             <Routes>
@@ -23,7 +23,7 @@ function App() {
               <Route path="/myProfile/*" element={<MyProfile />} />
             </Routes>
           </div>
-        </MainContextProvider>
+        </UsersContextProvider>
       </SoccerContextProvider>
     </Router>
   );

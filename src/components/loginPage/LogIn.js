@@ -1,7 +1,7 @@
 // react
 import { useState, useEffect, useContext } from "react";
 // context
-import MainContext from "../../contexts/MainContext";
+import UsersContext from "../../contexts/UsersContext";
 // components
 import ErrorSuccess from "../ErrorSuccess";
 // icons
@@ -21,7 +21,7 @@ let validEmail =
 
 const LogIn = () => {
   // context
-  const { users, createNewuser, logUser } = useContext(MainContext);
+  const { users, createNewuser, logUser } = useContext(UsersContext);
   // state for log in or register
   const [logInRegister, setLogInRegister] = useState("login");
   // state for show password
