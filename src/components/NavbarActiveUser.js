@@ -1,9 +1,9 @@
 // react
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 // context
 import MainContext from "../contexts/MainContext";
 // router dom
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // icons
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -11,40 +11,29 @@ import { BiUserCircle, BiLogOut } from "react-icons/bi";
 
 const NavbarActiveUser = () => {
   // context
-  const { activeUser, logOut, handleShowNavbar } = useContext(MainContext);
+  const { activeUser, logOut } = useContext(MainContext);
 
   // state for show money
   const [showMoney, setShowMoney] = useState(true);
 
-  // state for show user info
-  const [showUserInfo, setShowUserInfo] = useState(false);
+  // state for show user menu - when click on user icon on the right side of navbar
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const location = useLocation();
+
+  // when click on something close user menu
+  useEffect(() => {
+    setShowUserMenu(false);
+  }, [location]);
 
   // handleShowMoney
   const handleShowMoney = () => {
     setShowMoney(!showMoney);
   };
 
-  // handleShowUserInfo
-  const handleShowUserInfo = () => {
-    setShowUserInfo(!showUserInfo);
-  };
-
-  // handleMyProfileClick
-  const handleMyProfileClick = () => {
-    handleShowUserInfo();
-    closeNavbar();
-  };
-
-  // handleLogOut
-  const handleLogOut = () => {
-    handleShowUserInfo();
-    closeNavbar();
-    logOut();
-  };
-
-  // closeNavbar
-  const closeNavbar = () => {
-    window.innerWidth > 640 ? handleShowNavbar(true) : handleShowNavbar(false);
+  // handleShowUserMenu
+  const handleShowUserMenu = () => {
+    setShowUserMenu(!showUserMenu);
   };
 
   return (
@@ -67,19 +56,19 @@ const NavbarActiveUser = () => {
             value={activeUser.money}
             disabled={true}
           />
-          <p className="">€</p>
+          <p>€</p>
         </div>
         {/* Pay in */}
         <Link
           className="h-full bg-blue-500 px-3 text-white hover:bg-blue-400 flex"
           to="/myProfile/payment"
-          children={<button onClick={closeNavbar}>+ Pay In</button>}
+          children={<button>+ Pay In</button>}
         />
       </div>
       {/* My proflie */}
 
       <div
-        onClick={handleShowUserInfo}
+        onClick={handleShowUserMenu}
         className="h-ful ml-4 flex items-center justify-center text-white hover:text-blue-500 hover:transition-colors hover:duration-[500ms]  cursor-pointer"
       >
         <FaUserCircle className="mr-2 text-2xl " />
@@ -91,16 +80,13 @@ const NavbarActiveUser = () => {
       {/*  -52px da bi bilo poravnato jer je na navbar padding py-2, 53 da bude malo spusteno za large screens*/}
       <div
         className={`w-full ${
-          !showUserInfo ? "h-0" : "h-[100px]"
-        } transition-[height] duration-[300ms] bg-zinc-800 absolute top-[108px] right-0 z-20 overflow-hidden sm:top-[53px] sm:w-[300px] sm:right-[-20px]`}
+          !showUserMenu ? "h-0" : "h-[100px]"
+        } transition-[height] duration-[150ms] bg-zinc-800 absolute top-[108px] right-0 z-20 overflow-hidden sm:top-[53px] sm:w-[300px] sm:right-[-20px]`}
       >
         <Link
           to="/myProfile/accountDetails"
           children={
-            <div
-              onClick={handleMyProfileClick}
-              className="w-full h-[50px] px-3  flex items-center justify-start text-white hover:bg-blue-500 hover:text-white hover:cursor-pointer  transition-colors duration-[200ms]"
-            >
+            <div className="w-full h-[50px] px-3  flex items-center justify-start text-white hover:bg-blue-500 hover:text-white hover:cursor-pointer  transition-colors duration-[200ms]">
               <BiUserCircle className="text-2xl mr-1" />
               <p className="text-lg">My proflie</p>
             </div>
@@ -108,7 +94,7 @@ const NavbarActiveUser = () => {
         />
 
         <div
-          onClick={handleLogOut}
+          onClick={logOut}
           className="w-full h-[50px] px-3 flex items-center justify-start text-white hover:bg-blue-500 hover:text-white hover:cursor-pointer  transition-colors duration-[200ms]"
         >
           <BiLogOut className="text-2xl mr-1" />

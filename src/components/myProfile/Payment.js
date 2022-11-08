@@ -5,7 +5,7 @@ import MainContext from "../../contexts/MainContext";
 // components
 import ErrorSuccess from "../ErrorSuccess";
 // Icons
-import { FaQuestion, FaExclamationTriangle } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa";
 
 //get current year
 const currentYear = new Date().getFullYear();
