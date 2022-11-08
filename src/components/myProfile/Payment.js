@@ -12,7 +12,7 @@ const currentYear = new Date().getFullYear();
 
 const Payment = () => {
   // context
-  const { updateUserMoney } = useContext(UsersContext);
+  const { updateUserProp } = useContext(UsersContext);
 
   // state for credit card info
   const [creditCardInfo, setCreditCardInfo] = useState({
@@ -146,7 +146,7 @@ const Payment = () => {
   // handlePayMoney
   const handlePayMoney = () => {
     if (canMoveOn()) {
-      updateUserMoney(payInValue);
+      updateUserProp("money", payInValue);
       setError({
         active: true,
         message: `Successfully paid ${payInValue} € to your account!`,

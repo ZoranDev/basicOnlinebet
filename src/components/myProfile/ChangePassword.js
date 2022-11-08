@@ -12,7 +12,7 @@ const ChangePassword = () => {
   // context
   const {
     activeUser: { password },
-    changePassword,
+    updateUserProp,
   } = useContext(UsersContext);
 
   // state for input fields
@@ -86,7 +86,7 @@ const ChangePassword = () => {
         return;
       }
       resetState();
-      changePassword(inputData.newPassword);
+      updateUserProp("password", inputData.newPassword);
     }
   };
 

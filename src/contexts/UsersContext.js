@@ -19,24 +19,23 @@ export const UsersContextProvider = ({ children }) => {
   // createNewuser
   const createNewuser = (inputData) => {
     let newUser = inputData;
+    // get this user some new props
     newUser.id = getID();
     newUser.money = 0;
     newUser.tickets = [];
-    // then add new user to existing users
+    // add new user to existing users
     setUsers([...users, newUser]);
+    // set that user as active user
     setActiveUser(newUser);
+    // redirect to home page
     navigate("/");
   };
 
   // logUser
   const logUser = (email) => {
-    let newActiveUser;
     users.forEach((user) => {
-      if (user.email === email) {
-        newActiveUser = user;
-      }
+      user.email === email && setActiveUser(user);
     });
-    setActiveUser(newActiveUser);
     navigate("/");
   };
 
@@ -46,37 +45,18 @@ export const UsersContextProvider = ({ children }) => {
     navigate("/");
   };
 
-  // changePassword
-  const changePassword = (newPassword) => {
+  // updateUserProp - update userName, password, money or phone number
+  const updateUserProp = (whatToUpd, valueToUpd) => {
     setUsers(
       users.map((user) => {
         if (user.id === activeUser.id) {
-          user.password = newPassword;
-        }
-        return user;
-      })
-    );
-  };
-
-  // updateUserPersonalDetails
-  const updateUserPersonalDetails = (whatToUpd, valueToUpd) => {
-    setUsers(
-      users.map((user) => {
-        if (user.id === activeUser.id) {
+          user.password = whatToUpd === "password" ? valueToUpd : user.password;
           user.userName = whatToUpd === "userName" ? valueToUpd : user.userName;
           user.phone = whatToUpd === "phone" ? valueToUpd : user.phone;
-        }
-        return user;
-      })
-    );
-  };
-
-  // updateUserMoney
-  const updateUserMoney = (newMoney) => {
-    setUsers(
-      users.map((user) => {
-        if (user.id === activeUser.id) {
-          user.money = parseInt(newMoney) + parseInt(user.money);
+          user.money =
+            whatToUpd === "money"
+              ? parseInt(valueToUpd) + parseInt(user.money)
+              : user.money;
         }
         return user;
       })
@@ -105,12 +85,10 @@ export const UsersContextProvider = ({ children }) => {
       value={{
         users,
         activeUser,
+        updateUserProp,
         createNewuser,
         logUser,
         logOut,
-        changePassword,
-        updateUserPersonalDetails,
-        updateUserMoney,
         payTicket,
       }}
     >

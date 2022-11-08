@@ -10,7 +10,7 @@ import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
 
 const AccountDetailsItem = ({ id, title, text }) => {
   // context
-  const { updateUserPersonalDetails } = useContext(UsersContext);
+  const { updateUserProp } = useContext(UsersContext);
 
   // state for component info
   const [info, setInfo] = useState(text);
@@ -52,7 +52,8 @@ const AccountDetailsItem = ({ id, title, text }) => {
   // handleSubmitChanges
   const handleSubmitChanges = () => {
     if (!errorInInfo) {
-      updateUserPersonalDetails(id, info);
+      updateUserProp(id, info);
+      /* updateUserPersonalDetails(id, info); */
       handleEditInfo();
       setError({
         active: true,

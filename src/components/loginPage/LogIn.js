@@ -38,11 +38,11 @@ const LogIn = () => {
 
   useEffect(() => {
     isInputInfoOk()
-      ? setError({ active: true, message: "Check form info" })
+      ? setError({ active: true, message: "Check form info." })
       : setError({ active: false, message: "" });
   }, [inputData, logInRegister]);
 
-  // isInputInfoOk
+  // isInputInfoOk ?
   const isInputInfoOk = () => {
     let email = inputData.email;
     let userName = inputData.userName;
@@ -70,36 +70,46 @@ const LogIn = () => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
-  // haveInfo
-  const haveInfo = () => {
-    return logInRegister === "login"
-      ? inputData.email !== "" && inputData.password !== ""
-      : inputData.email !== "" &&
-          inputData.password !== "" &&
-          inputData.userName !== "" &&
-          inputData.phone !== "";
-  };
-
   // handleLogInRegister
   const handleLogInRegister = (e) => {
     e.preventDefault();
-    // check to see if input data are in correct form and if there is input info at all, different condition for log in and register
-    if (!error.active && haveInfo()) {
-      /* Check to see if btn is log in or btn is register */
-      logInRegister === "login"
-        ? users.map((user) => user.email).indexOf(inputData.email) === -1 ||
-          users.map((user) => user.password).indexOf(inputData.password) === -1
+    // check if input data are in correct form and if there is input info at all, different condition for log in and register
+    if (!error.active) {
+      /* Log in case*/
+      if (logInRegister === "login") {
+        // if user exist ?
+        users.map((user) => user.email).indexOf(inputData.email) === -1
           ? setError({
               active: true,
-              message: "User don't exist, check data or register.",
+              message: "User don't exist, register first.",
             })
-          : logUser(inputData.email)
-        : createNewuser(inputData);
+          : users.filter((user) => user.email === inputData.email)[0]
+              .password === inputData.password
+          ? logUser(inputData.email)
+          : setError({
+              active: true,
+              message: "Incorrect password.",
+            });
+        return;
+      }
+      /* Register case */
+      if (logInRegister === "register") {
+        users.map((user) => user.email).indexOf(inputData.email) === -1
+          ? createNewuser(inputData)
+          : setError({
+              active: true,
+              message: "User exist, try to log in.",
+            });
+        return;
+      }
     }
   };
 
   return (
-    <div className="w-[315px] mx-auto my-[100px] p-5 bg-zinc-400 rounded-md relative flex flex-col items-center sm:w-[500px]">
+    <form
+      onSubmit={handleLogInRegister}
+      className="w-[315px] mx-auto my-[100px] p-5 bg-zinc-400 rounded-md relative flex flex-col items-center sm:w-[500px]"
+    >
       {/* User icon */}
       <div className="w-[120px] h-[120px] bg-zinc-500 rounded-full flex items-center justify-center absolute -top-[60px] left-2/4 -translate-x-2/4 shadow-[inset_0_0_50px_rgba(255,255,255,0.7)]">
         <AiOutlineUser className="text-white text-6xl" />
@@ -135,6 +145,7 @@ const LogIn = () => {
           onChange={handleOnChange}
           placeholder="Email"
           className={`w-[90%] h-full px-3 py-1 text-xl focus:outline-0 sm:w-[265px] `}
+          required={true}
         />
       </div>
       {/* Password */}
@@ -161,6 +172,7 @@ const LogIn = () => {
           onChange={handleOnChange}
           placeholder="Password"
           className={`w-[90%] h-full px-3 py-1 text-xl focus:outline-0 sm:w-[265px] `}
+          required={true}
         />
       </div>
       {logInRegister === "register" && (
@@ -177,6 +189,7 @@ const LogIn = () => {
               onChange={handleOnChange}
               placeholder="User name"
               className={`w-[90%] h-full px-3 py-1 text-xl focus:outline-0 sm:w-[265px] `}
+              required={logInRegister === "register" ? true : false}
             />
           </div>
           {/* Phone */}
@@ -191,6 +204,7 @@ const LogIn = () => {
               onChange={handleOnChange}
               placeholder="Phone number"
               className={`w-[90%] h-full px-3 py-1 text-xl focus:outline-0 sm:w-[265px] `}
+              required={logInRegister === "register" ? true : false}
             />
           </div>
         </>
@@ -200,16 +214,16 @@ const LogIn = () => {
 
       {/*  Submit button */}
       <button
-        onClick={handleLogInRegister}
+        type="submit"
         className={`w-full h-[50px] my-3 ${
-          error.active || !haveInfo()
+          error.active
             ? "bg-zinc-300 cursor-not-allowed text-zinc-400"
             : "bg-blue-500 text-white hover:shadow-[inset_0_-50px_0_0_rgba(12,34,244,0.5)] hover:transition-shadow hover:duration-[300ms]"
         } text-xl rounded`}
       >
         {logInRegister === "login" ? "Log In" : "Register"}
       </button>
-    </div>
+    </form>
   );
 };
 
